@@ -1,0 +1,23 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "Kind Real Estate — Main Site",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "3000", "--directory", "/Users/alok/Downloads/Kind Real Estate "],
+      "port": 3000
+    },
+    {
+      "name": "Kind Real Estate — Pitch Deck",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "3001", "--directory", "/Users/alok/Downloads/Kind Real Estate "],
+      "port": 3001
+    },
+    {
+      "name": "Kind Real Estate — npx serve (all files)",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", "/Users/alok/Downloads/Kind Real Estate ", "-p", "3002", "--no-clipboard"],
+      "port": 3002
+    }
+  ]
+}

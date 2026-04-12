@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kind Real Estate — Founder Pitch Deck 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,700&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#07122b;--navy-mid:#0f2248;--navy-soft:#1a3460;--navy-card:#142040;--blue-glow:#2563eb;--blue-light:#3b82f6;--blue-pale:rgba(59,130,246,.12);--gold:#e8c56a;--gold-bright:#f0d080;--gold-pale:rgba(232,197,106,.12);--gold-mid:#c4870a;--white:#ffffff;--white-90:rgba(255,255,255,.9);--white-70:rgba(255,255,255,.7);--white-40:rgba(255,255,255,.4);--white-20:rgba(255,255,255,.2);--white-10:rgba(255,255,255,.1);--white-06:rgba(255,255,255,.06);--green:#10b981;--green-pale:rgba(16,185,129,.12);--red:#ef4444;--red-pale:rgba(239,68,68,.1);--border:rgba(255,255,255,.1);--border-gold:rgba(232,197,106,.25);--shadow-sm:0 2px 12px rgba(0,0,0,.25);--shadow:0 8px 32px rgba(0,0,0,.35);--shadow-lg:0 24px 64px rgba(0,0,0,.45);--shadow-3d:0 32px 80px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.06);--glow-blue:0 0 40px rgba(37,99,235,.3);--glow-gold:0 0 40px rgba(232,197,106,.25);}
+*{margin:0;padding:0;box-sizing:border-box;}html,body{height:100vh;width:100vw;overflow:hidden;}
+body{font-family:'Inter',sans-serif;background:var(--navy);color:var(--white);}
+.deck{position:relative;width:100vw;height:100vh;}
+.slide{position:absolute;inset:0;width:100%;height:100%;opacity:0;pointer-events:none;transform:translateY(28px) scale(.985);transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1);overflow:hidden;display:flex;flex-direction:column;background:var(--navy);}
+.slide.active{opacity:1;pointer-events:all;transform:translateY(0) scale(1);}
+.slide.out{opacity:0;transform:translateY(-28px) scale(.985);}
+#nav{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:200;display:flex;align-items:center;gap:8px;background:rgba(7,18,43,.8);backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:50px;padding:8px 18px;box-shadow:var(--shadow);}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--white-20);cursor:pointer;transition:all .3s;}
+.dot.on{background:var(--gold);transform:scale(1.6);}
+.nav-btn{background:none;border:none;cursor:pointer;color:var(--white-40);font-size:18px;transition:color .2s;padding:0 3px;}
+.nav-btn:hover{color:var(--gold);}
+#ctr{font-family:'JetBrains Mono',monospace;font-size:15px;color:var(--white-40);min-width:36px;text-align:center;}
+.inner{flex:1;display:flex;flex-direction:column;padding:44px 64px 36px;position:relative;z-index:2;}
+.bg-grid{position:absolute;inset:0;z-index:0;background-image:linear-gradient(rgba(37,99,235,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(37,99,235,.07) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 40%,transparent 100%);}
+.orb{position:absolute;border-radius:50%;filter:blur(80px);z-index:0;pointer-events:none;}
+.orb-1{width:500px;height:500px;background:radial-gradient(circle,rgba(37,99,235,.18),transparent 70%);top:-100px;right:-100px;}
+.orb-2{width:400px;height:400px;background:radial-gradient(circle,rgba(232,197,106,.12),transparent 70%);bottom:-80px;left:-80px;}
+.eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+.eyebrow-chip{font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);background:var(--gold-pale);border:1px solid var(--border-gold);padding:5px 14px;border-radius:20px;}
+.slide-title{font-family:'Playfair Display',serif;font-size:clamp(38px,4vw,66px);font-weight:800;line-height:1.06;color:var(--white);margin-bottom:6px;}
+.slide-title .accent{color:var(--gold);}
+.slide-title .blue{color:var(--blue-light);}
+.subtitle{font-size:16px;color:var(--white-40);line-height:1.65;margin-bottom:14px;}
+.card-3d{background:var(--navy-card);border:1px solid var(--border);border-radius:16px;padding:22px;box-shadow:var(--shadow-3d);position:relative;overflow:hidden;transform:perspective(800px) translateZ(0);transition:transform .3s,box-shadow .3s;backdrop-filter:blur(8px);}
+.card-3d::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.04) 0%,transparent 60%);border-radius:inherit;pointer-events:none;}
+.card-3d:hover{transform:perspective(800px) translateZ(12px) translateY(-4px);box-shadow:var(--shadow-3d),var(--glow-blue);}
+.card-3d.gold-glow:hover{box-shadow:var(--shadow-3d),var(--glow-gold);}
+.tag{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;padding:3px 9px;border-radius:20px;}
+.tag-blue{background:var(--blue-pale);color:var(--blue-light);border:1px solid rgba(59,130,246,.25);}
+.tag-gold{background:var(--gold-pale);color:var(--gold);border:1px solid var(--border-gold);}
+.tag-green{background:var(--green-pale);color:var(--green);border:1px solid rgba(16,185,129,.25);}
+.tag-red{background:var(--red-pale);color:var(--red);border:1px solid rgba(239,68,68,.2);}
+.line-anim{stroke-dasharray:3000;stroke-dashoffset:3000;}
+.slide.active .line-anim{animation:drawLine 2s ease forwards .3s;}
+@keyframes drawLine{to{stroke-dashoffset:0;}}
+.bar-rise{transform-origin:bottom;transform:scaleY(0);}
+.slide.active .bar-rise{animation:riseUp .8s cubic-bezier(.4,0,.2,1) forwards;}
+@keyframes riseUp{to{transform:scaleY(1);}}
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);margin:12px 0;}
+/* Cover */
+.cover-logo{width:64px;height:64px;background:linear-gradient(135deg,var(--blue-glow),var(--navy-soft));border-radius:18px;margin-bottom:28px;display:flex;align-items:center;justify-content:center;font-size:32px;box-shadow:0 12px 40px rgba(37,99,235,.4),0 0 0 1px rgba(59,130,246,.3);transform:perspective(400px) rotateX(12deg) rotateY(-8deg);}
+.cover-h{font-family:'Playfair Display',serif;font-size:clamp(64px,8vw,116px);font-weight:800;line-height:.98;color:var(--white);margin-bottom:12px;}
+.cover-h em{font-style:italic;background:linear-gradient(135deg,var(--gold-bright),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.cover-sub{font-size:18px;color:var(--white-40);max-width:560px;line-height:1.65;margin:16px 0 36px;}
+.cover-pills{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:48px;}
+.cover-pill{padding:7px 16px;border-radius:50px;border:1px solid var(--border);font-size:13px;color:var(--white-70);font-weight:500;background:var(--white-06);backdrop-filter:blur(8px);}
+.cover-stats{display:flex;gap:52px;}
+.cs-val{font-family:'Playfair Display',serif;font-size:42px;font-weight:700;color:var(--white);line-height:1;}
+.cs-val span{color:var(--gold);}
+.cs-lbl{font-size:13px;color:var(--white-40);margin-top:4px;letter-spacing:.04em;}
+.cover-right{position:absolute;right:0;top:0;bottom:0;width:380px;background:linear-gradient(160deg,rgba(37,99,235,.08),rgba(232,197,106,.04));border-left:1px solid var(--border);display:flex;flex-direction:column;justify-content:center;padding:52px 40px;gap:28px;}
+.cr-label{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--white-40);margin-bottom:6px;}
+.cr-val{font-family:'Playfair Display',serif;font-size:36px;font-weight:700;color:var(--white);line-height:1;}
+.cr-sub{font-size:14px;color:var(--gold);margin-top:3px;}
+.cr-div{height:1px;background:var(--border);}
+/* Problem */
+.prob-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:16px;flex:1;align-content:start;}
+.prob-card{background:var(--navy-card);border:1px solid var(--border);border-radius:16px;padding:22px 20px;box-shadow:var(--shadow-3d);position:relative;overflow:hidden;transition:transform .3s;}
+.prob-card:hover{transform:perspective(600px) translateZ(14px) translateY(-4px);}
+.prob-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:3px 3px 0 0;}
+.prob-card.p-red::after{background:linear-gradient(90deg,var(--red),#ff7a60);}
+.prob-card.p-gold::after{background:linear-gradient(90deg,var(--gold),var(--gold-bright));}
+.prob-card.p-blue::after{background:linear-gradient(90deg,var(--blue-glow),var(--blue-light));}
+.prob-card.p-green::after{background:linear-gradient(90deg,var(--green),#34d399);}
+.prob-big{font-family:'Playfair Display',serif;font-size:54px;font-weight:700;line-height:1;margin:10px 0 7px;}
+.p-red .prob-big{color:var(--red);}.p-gold .prob-big{color:var(--gold);}.p-blue .prob-big{color:var(--blue-light);}.p-green .prob-big{color:var(--green);}
+.prob-title{font-size:16px;font-weight:600;color:var(--white);margin-bottom:5px;}
+.prob-body{font-size:13px;color:var(--white-40);line-height:1.65;}
+.prob-src{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--white-20);margin-top:10px;}
+.problem-banner{margin-top:14px;padding:14px 20px;background:linear-gradient(135deg,rgba(239,68,68,.08),transparent);border:1px solid rgba(239,68,68,.2);border-radius:12px;display:flex;align-items:center;gap:14px;}
+/* Compare table */
+.compare-table{flex:1;margin-top:14px;border-radius:14px;overflow:hidden;box-shadow:var(--shadow-3d);border:1px solid var(--border);}
+.ct-hdr-cell{padding:16px 18px;font-size:14px;font-weight:700;}
+.ct-body-row{display:grid;border-bottom:1px solid rgba(255,255,255,.06);transition:background .2s;}
+.ct-body-row:last-child{border-bottom:none;}
+.ct-body-row:hover{background:var(--white-06);}
+.ct-cell{padding:12px 18px;font-size:13px;display:flex;align-items:center;gap:7px;}
+.ct-dim{font-weight:600;color:var(--white-90);}
+.ct-bad{color:var(--red);}.ct-ok{color:var(--gold);}.ct-win{color:var(--green);font-weight:600;}
+/* Features */
+.feat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:14px;flex:1;align-content:start;}
+.feat-card{background:var(--navy-card);border:1px solid var(--border);border-radius:14px;padding:18px;box-shadow:var(--shadow);transition:all .3s;position:relative;overflow:hidden;}
+.feat-card:hover{border-color:rgba(59,130,246,.4);transform:translateY(-4px);box-shadow:var(--shadow-3d),var(--glow-blue);}
+.feat-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:12px;}
+.fi-blue{background:var(--blue-pale);}.fi-gold{background:var(--gold-pale);}.fi-green{background:var(--green-pale);}.fi-red{background:var(--red-pale);}
+.feat-title{font-size:15px;font-weight:700;color:var(--white);margin-bottom:5px;}
+.feat-body{font-size:13px;color:var(--white-40);line-height:1.65;}
+.feat-new{position:absolute;top:12px;right:12px;font-size:10px;font-weight:700;letter-spacing:.1em;padding:2px 7px;border-radius:10px;}
+/* Budget */
+.budget-row{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:14px;}
+.budget-row:last-child{border-bottom:none;}
+.budget-row.total{font-weight:700;font-size:16px;border-top:1px solid rgba(232,197,106,.3);margin-top:6px;padding-top:13px;}
+.br-lbl{color:var(--white-70);}.br-val{color:var(--white);}
+.br-val.total{color:var(--gold);font-family:'Playfair Display',serif;font-size:26px;}
+/* Timeline */
+.tl-item{display:grid;grid-template-columns:90px 28px 1fr;margin-bottom:4px;}
+.tl-wk{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--gold);padding-top:12px;text-align:right;padding-right:12px;}
+.tl-gutter{display:flex;flex-direction:column;align-items:center;}
+.tl-dot{width:12px;height:12px;border-radius:50%;background:var(--blue-light);border:2px solid var(--navy);flex-shrink:0;margin-top:9px;z-index:2;}
+.tl-dot.gold{background:var(--gold);box-shadow:0 0 0 6px rgba(232,197,106,.15);}
+.tl-line{flex:1;width:2px;background:rgba(255,255,255,.1);min-height:24px;}
+.tl-card{background:var(--navy-card);border:1px solid var(--border);border-radius:10px;padding:10px 14px;margin-left:10px;margin-bottom:8px;box-shadow:var(--shadow-sm);}
+.tl-card.launch{border-color:var(--border-gold);background:rgba(232,197,106,.06);}
+.tl-title{font-size:14px;font-weight:600;color:var(--white);}
+.tl-desc{font-size:12px;color:var(--white-40);margin-top:3px;line-height:1.55;}
+.phase-badge{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;padding:2px 6px;border-radius:10px;background:var(--blue-pale);color:var(--blue-light);margin-left:7px;}
+.phase-badge.gold{background:var(--gold-pale);color:var(--gold);}
+/* KPI */
+.kpi-card{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:14px;padding:18px 20px;transition:border-color .2s;}
+.kpi-card:hover{border-color:var(--border-gold);}
+.kpi-val{font-family:'Playfair Display',serif;font-size:38px;font-weight:700;color:var(--gold);line-height:1;}
+.kpi-lbl{font-size:13px;color:var(--white-40);margin-top:3px;}
+.kpi-note{font-size:12px;color:var(--green);font-weight:600;margin-top:4px;}
+/* Gap analysis */
+.gap-grid{flex:1;margin-top:14px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;}
+.gap-col{display:flex;flex-direction:column;gap:8px;}
+.gap-col-hdr{text-align:center;padding:12px;border-radius:10px;margin-bottom:2px;}
+.gap-item{background:var(--navy-card);border:1px solid var(--border);border-radius:10px;padding:10px 12px;display:flex;align-items:flex-start;gap:8px;font-size:13px;transition:border-color .2s;line-height:1.6;}
+.gap-item:hover{border-color:rgba(255,255,255,.2);}
+.gap-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:4px;}
+/* Closing */
+.close-card{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:14px;padding:20px;text-align:center;transition:border-color .2s;}
+.close-card:hover{border-color:var(--border-gold);}
+/* Screen cards */
+.screen-card{background:var(--navy-card);border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:var(--shadow-3d);display:flex;flex-direction:column;transition:all .3s;}
+.screen-card:hover{transform:translateY(-4px);border-color:rgba(59,130,246,.35);}
+.sc-header{padding:11px 14px;}
+.sc-step{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;color:var(--white-40);}
+.sc-title{font-size:14px;font-weight:700;color:var(--white);margin-top:3px;}
+.sc-body{padding:11px 14px;flex:1;display:flex;flex-direction:column;gap:6px;font-size:13px;}
+.sc-mini{background:var(--navy);border-radius:8px;padding:8px;font-size:12px;}
+</style>
+</head>
+<body>
+<div class="deck" id="deck">
+
+<!-- S1 COVER -->
+<div class="slide active" id="s1">
+  <div class="bg-grid"></div><div class="orb orb-1"></div><div class="orb orb-2"></div>
+  <div class="inner">
+    <div class="cover-logo">🏡</div>
+    <div class="cover-h">Kind Real<br><em>Estate</em></div>
+    <p class="cover-sub">A trust-first, AI-powered real estate platform engineered to eliminate pressure, expose hidden fees, and make every transaction meaningful.</p>
+    <div class="cover-pills">
+      <span class="cover-pill">✦ No Pressure Buying</span><span class="cover-pill">🎯 AI Fair Pricing</span><span class="cover-pill">💚 Kindness Layer</span><span class="cover-pill">🏠 Buy · Sell · Rent · Mortgage</span><span class="cover-pill">$175K MVP · 8 Months</span>
+    </div>
+    <div class="cover-stats">
+      <div><div class="cs-val">$<span>130</span>B</div><div class="cs-lbl">US Real Estate 2024</div></div>
+      <div><div class="cs-val"><span>5.7</span>%</div><div class="cs-lbl">Avg Commission 2026</div></div>
+      <div><div class="cs-val">$<span>209</span>B</div><div class="cs-lbl">PropTech by 2035</div></div>
+    </div>
+  </div>
+  <div class="cover-right">
+    <div><div class="cr-label">Market Size</div><div class="cr-val">$130B</div><div class="cr-sub">US RE · 4.1% CAGR → 2030</div></div>
+    <div class="cr-div"></div>
+    <div><div class="cr-label">PropTech CAGR</div><div class="cr-val">16.1%</div><div class="cr-sub">$47B → $209B · 2025–2035</div></div>
+    <div class="cr-div"></div>
+    <div><div class="cr-label">Investment Ask</div><div class="cr-val">$175K</div><div class="cr-sub">Full-stack · AI · Legal · Lettings</div></div>
+    <div class="cr-div"></div>
+    <div><div class="cr-label">Yr 2 Revenue</div><div class="cr-val">$2.4M</div><div class="cr-sub">Conservative · 5 revenue streams</div></div>
+  </div>
+</div>
+
+<!-- S2 PROBLEM -->
+<div class="slide" id="s2">
+  <div class="bg-grid"></div>
+  <div class="inner">
+    <div class="eyebrow"><span class="eyebrow-chip">01 · The Problem</span></div>
+    <div class="slide-title">A $130B industry built on <span class="accent">broken trust</span></div>
+    <div class="prob-grid">
+      <div class="prob-card p-red"><div class="tag tag-red">Commission Trap</div><div class="prob-big">5.7%</div><div class="prob-title">Avg Commission 2026</div><div class="prob-body">Post-NAR $418M settlement commissions <strong>rose</strong>: 5.32% (2024) → 5.7% (2026). On a $400K home that's <strong>$22,800 extracted</strong>.</div><div class="prob-src">↑ Clever RE / RealEstateWitch 2026</div></div>
+      <div class="prob-card p-gold"><div class="tag tag-gold">Data Blindness</div><div class="prob-big">89%</div><div class="prob-title">Data Goes Unused</div><div class="prob-body">89% of real estate firms analyse under 20% of available data. Pricing is driven by agent opinion, not truth.</div><div class="prob-src">↑ Wiss PropTech Study 2025</div></div>
+      <div class="prob-card p-blue"><div class="tag tag-blue">Market Paralysis</div><div class="prob-big">4M</div><div class="prob-title">Sales — 30-Year Low</div><div class="prob-body">Annual US home sales frozen at ~4M for 3 straight years. Trust is the unlocking variable, not rates.</div><div class="prob-src">↑ NAR 2025 · ResiClub 2026</div></div>
+      <div class="prob-card p-green"><div class="tag tag-green">BBC Exposed</div><div class="prob-big">£1</div><div class="prob-title">Purplebricks Sold For</div><div class="prob-body">BBC Panorama (July 2025) exposed Purplebricks using hidden pressure tactics, forced tie-ins, and false transparency. <strong>Digitising the old system isn't disruption.</strong></div><div class="prob-src">↑ BBC Panorama Jul 2025</div></div>
+    </div>
+    <div class="problem-banner"><div style="font-size:24px;">⚡</div><div style="font-size:15px;color:var(--white-70);line-height:1.6;">The market doesn't need a cheaper version of the old model — <strong style="color:var(--gold);">it needs a redesigned one.</strong></div></div>
+  </div>
+</div>
+
+<!-- S3 MARKET -->
+<div class="slide" id="s3">
+  <div class="bg-grid"></div><div class="orb orb-1"></div>
+  <div class="inner">
+    <div class="eyebrow"><span class="eyebrow-chip">02 · Market Opportunity</span></div>
+    <div class="slide-title">Massive market. <span class="accent">Perfect window.</span></div>
+    <div style="flex:1;display:grid;grid-template-columns:1fr 1.5fr;gap:18px;margin-top:14px;">
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div class="card-3d"><div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--white-40);letter-spacing:.1em;margin-bottom:6px;">US REAL ESTATE</div><div style="font-family:'Playfair Display',serif;font-size:36px;font-weight:700;color:var(--white);">$130B</div><div style="font-size:14px;color:var(--white-40);margin-top:4px;">Market 2024 · 4.1% CAGR → 2030</div></div>
+        <div class="card-3d gold-glow"><div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--white-40);letter-spacing:.1em;margin-bottom:6px;">GLOBAL PROPTECH</div><div style="font-family:'Playfair Display',serif;font-size:36px;font-weight:700;color:var(--gold);">$47B→$209B</div><div style="font-size:14px;color:var(--white-40);margin-top:4px;">2025→2035 · CAGR 16.1%</div></div>
+        <div class="card-3d"><div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--white-40);letter-spacing:.1em;margin-bottom:6px;">SELLER LOSS PER $400K HOME</div><div style="font-family:'Playfair Display',serif;font-size:36px;font-weight:700;color:var(--red);">$22,800</div><div style="font-size:14px;color:var(--white-40);margin-top:4px;">Kind RE saves $12,800 per transaction</div></div>
+      </div>
+      <div class="card-3d" style="padding:22px;display:flex;flex-direction:column;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--white-40);letter-spacing:.1em;margin-bottom:16px;">PROPTECH GLOBAL MARKET (USD BILLION) 2022–2035</div>
+        <svg width="100%" height="100%" viewBox="0 0 500 260" style="flex:1;">
+          <defs><linearGradient id="bG1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#3b82f6"/><stop offset="100%" stop-color="#1e3a5f"/></linearGradient><linearGradient id="bG2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#e8c56a"/><stop offset="100%" stop-color="#c4870a"/></linearGradient><linearGradient id="aFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="rgba(59,130,246,.2)"/><stop offset="100%" stop-color="rgba(59,130,246,0)"/></linearGradient></defs>
+          <line x1="55" y1="10" x2="490" y2="10" stroke="rgba(255,255,255,.05)" stroke-width="1"/><line x1="55" y1="60" x2="490" y2="60" stroke="rgba(255,255,255,.05)" stroke-width="1"/><line x1="55" y1="110" x2="490" y2="110" stroke="rgba(255,255,255,.05)" stroke-width="1"/><line x1="55" y1="160" x2="490" y2="160" stroke="rgba(255,255,255,.05)" stroke-width="1"/><line x1="55" y1="210" x2="490" y2="210" stroke="rgba(255,255,255,.08)" stroke-width="1"/>
+          <text x="48" y="14" fill="rgba(255,255,255,.3)" font-size="9" font-family="JetBrains Mono" text-anchor="end">$200B</text><text x="48" y="64" fill="rgba(255,255,255,.3)" font-size="9" font-family="JetBrains Mono" text-anchor="end">$150B</text><text x="48" y="114" fill="rgba(255,255,255,.3)" font-size="9" font-family="JetBrains Mono" text-anchor="end">$100B</text><text x="48" y="164" fill="rgba(255,255,255,.3)" font-size="9" font-family="JetBrains Mono" text-anchor="end">$50B</text><text x="48" y="214" fill="rgba(255,255,255,.3)" font-size="9" font-family="JetBrains Mono" text-anchor="end">$0</text>
+          <path d="M72,201 L118,192 L164,181 L210,169 L256,154 L302,133 L345,110 L392,75 L438,18 L438,210 Z" fill="url(#aFill)"/>
+          <g class="bar-rise" style="animation-delay:.1s"><rect x="58" y="192" width="28" height="18" fill="url(#bG1)" rx="4"/></g><text x="72" y="188" fill="rgba(255,255,255,.4)" font-size="8" text-anchor="middle" font-family="JetBrains Mono">$18B</text><text x="72" y="225" fill="rgba(255,255,255,.3)" font-size="8" text-anchor="middle" font-family="JetBrains Mono">2022</text>
+          <g class="bar-rise" style="animation-delay:.2s"><rect x="104" y="183" width="28" height="27" fill="url(#bG1)" rx="4"/></g><text x="118" y="179" fill="rgba(255,255,255,.4)" font-size="8" text-anchor="middle" font-family="JetBrains Mono">$27B</text><text x="118" y="225" fill="rgba(255,255,255,.3)" font-size="8" text-anchor="middle" font-family="JetBrains Mono">2023</text>
+          <g class="bar-rise" style="animation-delay:.3s"><rect x="150" y="172" width="28" height="38" fill="url(#bG1)" rx="4"/></g><text x="164" y="168" fill="rgba(255,255,255,.4)" font-size="8" text-anchor="middle" font-family="JetBrains Mono">$38B</text><text x="164" y="225" fill="rgba(255,255,255,.3)" font-size="8" text-anchor="middle" font-family="JetBrains Mono">2024</text>
+          <g class="bar-rise" style="animation-delay:.4s"><rect x="196" y="163" width="28" height="47" fill="url(#bG2)" rx="4"/></g><text x="210" y="159" fill="#e8c56a" font-size="9" font-weight="bold" text-anchor="middle" font-family="JetBrains Mono">$47B</text><text x="210" y="225" fill="#e8c56a" font-size="8" font-weight="bold" text-anchor="middle" font-family="JetBrains Mono">NOW</text>
+          <g class="bar-rise" style="animation-delay:.6s"><rect x="288" y="133" width="28" height="77" fill="url(#bG1)" rx="4"/></g><text x="302" y="129" fill="rgba(255,255,255,.4)" font-size="8" text-anchor="middle" font-family="JetBrains Mono">$77B</text><text x="302" y="225" fill="rgba(255,255,255,.3)" font-size="8" text-anchor="middle" font-family="JetBrains Mono">2028</text>
+          <g class="bar-rise" style="animation-delay:.8s"><rect x="424" y="10" width="28" height="200" fill="url(#bG2)" rx="4"/></g><text x="438" y="6" fill="#e8c56a" font-size="10" font-weight="bold" text-anchor="middle" font-family="JetBrains Mono">$209B</text><text x="438" y="225" fill="#e8c56a" font-size="8" font-weight="bold" text-anchor="middle" font-family="JetBrains Mono">2035</text>
+          <rect x="460" y="60" width="38" height="36" rx="8" fill="rgba(232,197,106,.1)" stroke="rgba(232,197,106,.2)"/><text x="479" y="74" fill="#e8c56a" font-size="8" text-anchor="middle" font-family="JetBrains Mono">CAGR</text><text x="479" y="91" fill="#e8c56a" font-size="17" font-weight="bold" text-anchor="middle" font-family="Playfair Display">16.1%</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S4 GAP ANALYSIS -->
+<div class="slide" id="s4">
+  <div class="bg-grid"></div>
+  <div class="inner">
+    <div class="eyebrow"><span class="eyebrow-chip">03 · Purplebricks Gap Analysis</span></div>
+    <div class="slide-title">What they built. <span class="accent">Where they failed.</span> What we fix.</div>
+    <div class="gap-grid">
+      <div class="gap-col">
+        <div class="gap-col-hdr" style="background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.2);"><div style="font-size:22px;margin-bottom:5px;">✅</div><div style="font-size:16px;font-weight:700;color:var(--green);">What Purplebricks Got Right</div><div style="font-size:12px;color:var(--white-40);margin-top:3px;">Kind RE adopts these</div></div>
+        <div class="gap-item"><div class="gap-dot" style="background:var(--green)"></div><div><strong style="color:var(--white)">Fixed-fee model</strong> — proved buyers hate % commissions</div></div>
+        <div class="gap-item"><div class="gap-dot" style="background:var(--green)"></div><div><strong style="color:var(--white)">Free valuation</strong> — in-person & virtual, no obligation</div></div>
+        <div class="gap-item"><div class="gap-dot" style="background:var(--green)"></div><div><strong style="color:var(--white)">Professional photography + 360° tour</strong> — now expected standard</div></div>
+        <div class="gap-item"><div class="gap-dot" style="background:var(--green)"></div><div><strong style="color:var(--white)">Online self-managed dashboard</strong> — viewings, offers, messaging</div></div>
+        <div class="gap-item"><div class="gap-dot" style="background:var(--green)"></div><div><strong style="color:var(--white)">Mortgage advice integration</strong> — 12,000+ mortgages from 90+ lenders</div></div>
+        <div class="gap-item"><div class="gap-dot" style="background:var(--green)"></div><div><strong style="color:var(--white)">Lettings for landlords + tenants</strong> — significant TAM expansion</div></div>
+        <div class="gap-item"><div class="gap-dot" style="background:var(--green)"></div><div><strong style="color:var(--white)">Deposit protection scheme</strong> — reduces fall-throughs</div></div>
+      </div>
+      <div class="gap-col">
+        <div class="gap-col-hdr" style="background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);"><div style="font-size:22px;margin-bottom:5px;">❌</div><div style="font-size:16px;font-weight:700;color:var(--red);">What Purplebricks Got Wrong</div><div style="font-size:12px;color:var(--white-40);margin-top:3px;">BBC Panorama (Jul 2025) + £1B lesson</div></div>
+        <div class="gap-item"><div class="gap-dot" style="background:var(--red)"></div><div><strong style="color:var(--red)">Hidden pressure tactics</strong> — BBC exposed agents using forced upsells</div></div>
+        <div class="gap-item"><div class="gap-dot" style="background:var(--red)"></div><div><strong style="color:var(--red)">Tied conveyancing</strong> — forced partner solicitor or £360 penalty</div></div>
+        <div class="gap-item"><div class="gap-dot" style="background:var(--red)"></div><div><strong style="color:var(--red)">"Local experts" who aren't local</strong> — agents 30-40 miles away</div></div>
+        <div class="gap-item"><div class="gap-dot" style="background:var(--red)"></div><div><strong style="color:var(--red)">No AI personalization</strong> — still uses keyword search, zero lifestyle matching</div></div>
+        <div class="gap-item"><div class="gap-dot" style="background:var(--red)"></div><div><strong style="color:var(--red)">Declining trust</strong> — Trustpilot 4.7 (2018) → 4.3 (2026)</div></div>
+        <div class="gap-item"><div class="gap-dot" style="background:var(--red)"></div><div><strong style="color:var(--red)">Hidden fee creep</strong> — AML £80, Rightmove markup, mortgage conflicts</div></div>
+        <div class="gap-item"><div class="gap-dot" style="background:var(--red)"></div><div><strong style="color:var(--red)">Sold for £1 in 2023</strong> — £1B raised, still lost £15-20M/yr</div></div>
+      </div>
+      <div class="gap-col">
+        <div class="gap-col-hdr" style="background:rgba(232,197,106,.08);border:1px solid var(--border-gold);"><div style="font-size:22px;margin-bottom:5px;">🏡</div><div style="font-size:16px;font-weight:700;color:var(--gold);">Kind RE's Answer</div><div style="font-size:12px;color:var(--white-40);margin-top:3px;">Adopt the wins. Eliminate the failures.</div></div>
+        <div class="gap-item" style="border-color:rgba(232,197,106,.2);"><div class="gap-dot" style="background:var(--gold)"></div><div><strong style="color:var(--gold)">Fixed-fee + % hybrid</strong> — seller chooses, full transparency</div></div>
+        <div class="gap-item" style="border-color:rgba(232,197,106,.2);"><div class="gap-dot" style="background:var(--gold)"></div><div><strong style="color:var(--gold)">Fair Value Engine™</strong> — AI replaces agent opinion with data</div></div>
+        <div class="gap-item" style="border-color:rgba(232,197,106,.2);"><div class="gap-dot" style="background:var(--gold)"></div><div><strong style="color:var(--gold)">Photography + 3D tour</strong> — partner network, no markup, disclosed</div></div>
+        <div class="gap-item" style="border-color:rgba(232,197,106,.2);"><div class="gap-dot" style="background:var(--gold)"></div><div><strong style="color:var(--gold)">Kindness Score™ agents</strong> — vetted for ethics. No BBC scandal.</div></div>
+        <div class="gap-item" style="border-color:rgba(232,197,106,.2);"><div class="gap-dot" style="background:var(--gold)"></div><div><strong style="color:var(--gold)">Open legal marketplace</strong> — multiple conveyancers compete. Zero tie-in.</div></div>
+        <div class="gap-item" style="border-color:rgba(232,197,106,.2);"><div class="gap-dot" style="background:var(--gold)"></div><div><strong style="color:var(--gold)">Disclosed mortgage referral</strong> — transparent commission. User chooses.</div></div>
+        <div class="gap-item" style="border-color:rgba(232,197,106,.2);"><div class="gap-dot" style="background:var(--gold)"></div><div><strong style="color:var(--gold)">Kindness Layer at close</strong> — emotional loyalty no competitor can copy</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S5 3-WAY COMPARISON -->
+<div class="slide" id="s5">
+  <div class="bg-grid"></div>
+  <div class="inner">
+    <div class="eyebrow"><span class="eyebrow-chip">04 · Three-Way Comparison</span></div>
+    <div class="slide-title">Traditional vs Purplebricks vs <span class="accent">Kind RE</span></div>
+    <div class="compare-table">
+      <div style="display:grid;grid-template-columns:1.8fr 1fr 1fr 1.2fr;background:var(--navy-mid);">
+        <div class="ct-hdr-cell" style="color:var(--white-70);">What Matters Most</div>
+        <div class="ct-hdr-cell" style="color:var(--red);border-left:1px solid var(--border);">🏚 Traditional</div>
+        <div class="ct-hdr-cell" style="color:var(--white-40);border-left:1px solid var(--border);">🟣 Purplebricks</div>
+        <div class="ct-hdr-cell" style="color:var(--gold);border-left:1px solid var(--border);">🏡 Kind RE</div>
+      </div>
+      <div style="background:var(--navy-card);">
+        <div class="ct-body-row" style="grid-template-columns:1.8fr 1fr 1fr 1.2fr;"><div class="ct-cell ct-dim">💰 Fee Structure</div><div class="ct-cell ct-bad" style="border-left:1px solid rgba(255,255,255,.05);">✗ 5.7% (~$22,800)</div><div class="ct-cell ct-ok" style="border-left:1px solid rgba(255,255,255,.05);">~ Fixed £599–£1,699</div><div class="ct-cell ct-win" style="border-left:1px solid rgba(255,255,255,.05);">✓ Fixed OR 2.5% — your choice</div></div>
+        <div class="ct-body-row" style="grid-template-columns:1.8fr 1fr 1fr 1.2fr;"><div class="ct-cell ct-dim">🎯 AI Pricing</div><div class="ct-cell ct-bad" style="border-left:1px solid rgba(255,255,255,.05);">✗ Agent guesswork</div><div class="ct-cell ct-ok" style="border-left:1px solid rgba(255,255,255,.05);">~ Basic valuation</div><div class="ct-cell ct-win" style="border-left:1px solid rgba(255,255,255,.05);">✓ Fair Value Engine™</div></div>
+        <div class="ct-body-row" style="grid-template-columns:1.8fr 1fr 1fr 1.2fr;"><div class="ct-cell ct-dim">⚖️ Legal / Conveyancing</div><div class="ct-cell ct-bad" style="border-left:1px solid rgba(255,255,255,.05);">✗ External only</div><div class="ct-cell ct-bad" style="border-left:1px solid rgba(255,255,255,.05);">✗ Forced (£360 penalty)</div><div class="ct-cell ct-win" style="border-left:1px solid rgba(255,255,255,.05);">✓ Open marketplace</div></div>
+        <div class="ct-body-row" style="grid-template-columns:1.8fr 1fr 1fr 1.2fr;"><div class="ct-cell ct-dim">🏠 Lettings</div><div class="ct-cell ct-ok" style="border-left:1px solid rgba(255,255,255,.05);">~ Traditional agents</div><div class="ct-cell ct-ok" style="border-left:1px solid rgba(255,255,255,.05);">~ Limited cities</div><div class="ct-cell ct-win" style="border-left:1px solid rgba(255,255,255,.05);">✓ Full landlord + tenant module</div></div>
+        <div class="ct-body-row" style="grid-template-columns:1.8fr 1fr 1fr 1.2fr;"><div class="ct-cell ct-dim">📋 Listing Honesty</div><div class="ct-cell ct-bad" style="border-left:1px solid rgba(255,255,255,.05);">✗ All pros, no cons</div><div class="ct-cell ct-bad" style="border-left:1px solid rgba(255,255,255,.05);">✗ Marketing copy only</div><div class="ct-cell ct-win" style="border-left:1px solid rgba(255,255,255,.05);">✓ Truth Layer™</div></div>
+        <div class="ct-body-row" style="grid-template-columns:1.8fr 1fr 1fr 1.2fr;"><div class="ct-cell ct-dim">🤖 AI Personalization</div><div class="ct-cell ct-bad" style="border-left:1px solid rgba(255,255,255,.05);">✗ None</div><div class="ct-cell ct-bad" style="border-left:1px solid rgba(255,255,255,.05);">✗ None</div><div class="ct-cell ct-win" style="border-left:1px solid rgba(255,255,255,.05);">✓ Lifestyle · values · priorities</div></div>
+        <div class="ct-body-row" style="grid-template-columns:1.8fr 1fr 1fr 1.2fr;"><div class="ct-cell ct-dim">🤝 Agent Ethics</div><div class="ct-cell ct-bad" style="border-left:1px solid rgba(255,255,255,.05);">✗ Commission-driven</div><div class="ct-cell ct-bad" style="border-left:1px solid rgba(255,255,255,.05);">✗ BBC exposed</div><div class="ct-cell ct-win" style="border-left:1px solid rgba(255,255,255,.05);">✓ Kindness Score™</div></div>
+        <div class="ct-body-row" style="grid-template-columns:1.8fr 1fr 1fr 1.2fr;border-bottom:none;"><div class="ct-cell ct-dim">💚 Social Impact</div><div class="ct-cell ct-bad" style="border-left:1px solid rgba(255,255,255,.05);">✗ None</div><div class="ct-cell ct-bad" style="border-left:1px solid rgba(255,255,255,.05);">✗ None</div><div class="ct-cell ct-win" style="border-left:1px solid rgba(255,255,255,.05);">✓ Kindness Layer™</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S6 FEATURES -->
+<div class="slide" id="s6">
+  <div class="bg-grid"></div><div class="orb orb-1"></div>
+  <div class="inner">
+    <div class="eyebrow"><span class="eyebrow-chip">05 · Platform Features</span></div>
+    <div class="slide-title">Eight pillars of a <span class="accent">trust-first platform</span></div>
+    <div class="feat-grid">
+      <div class="feat-card"><div class="feat-new tag tag-gold">KEY DIFF</div><div class="feat-icon fi-gold">🎯</div><div class="feat-title">Fair Value Engine™</div><div class="feat-body">AI property valuation using MLS comps, demand signals, market data. Data-driven truth — not agent opinion.</div></div>
+      <div class="feat-card"><div class="feat-new tag tag-blue">AI CORE</div><div class="feat-icon fi-blue">🧠</div><div class="feat-title">Smart Lifestyle Matching</div><div class="feat-body">ML-powered recommendations based on lifestyle, values, priorities — not commission bias. 5–10 curated results.</div></div>
+      <div class="feat-card"><div class="feat-new tag tag-gold">NEW</div><div class="feat-icon fi-gold">🏠</div><div class="feat-title">Lettings Module</div><div class="feat-body">Full landlord + tenant flow: list to let, AI rent pricing, tenant matching, Kind Pact™ deposit, digital AST contracts.</div></div>
+      <div class="feat-card"><div class="feat-new tag tag-blue">NEW</div><div class="feat-icon fi-blue">🏦</div><div class="feat-title">Mortgage Marketplace</div><div class="feat-body">Transparent comparison built into transaction flow. Commission fully disclosed — unlike Purplebricks' hidden fees.</div></div>
+      <div class="feat-card"><div class="feat-new tag tag-green">NEW</div><div class="feat-icon fi-green">⚖️</div><div class="feat-title">Open Legal Marketplace</div><div class="feat-body">Multiple vetted conveyancers compete. Zero tie-ins, zero penalties. The exact failure that got Purplebricks banned.</div></div>
+      <div class="feat-card"><div class="feat-icon fi-blue">📋</div><div class="feat-title">Truth Layer™ Listings</div><div class="feat-body">Every listing shows honest Pros AND Cons. No sugarcoating. Truth builds long-term trust and referrals.</div></div>
+      <div class="feat-card"><div class="feat-icon fi-green">⚡</div><div class="feat-title">Digital Transaction Engine</div><div class="feat-body">DocuSign + Stripe + MLS feeds. Close in 14–21 days vs 45-day industry avg. No paperwork chaos.</div></div>
+      <div class="feat-card"><div class="feat-new tag tag-gold">UNIQUE</div><div class="feat-icon fi-gold">💚</div><div class="feat-title">Kindness Layer™</div><div class="feat-body">Optional impact contribution at closing. AI-generated impact story. The emotional differentiator no competitor can copy.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- S7 BUDGET -->
+<div class="slide" id="s7">
+  <div class="bg-grid"></div>
+  <div class="inner">
+    <div class="eyebrow"><span class="eyebrow-chip">06 · MVP Budget</span></div>
+    <div class="slide-title">Everything needed. <span class="accent">Nothing wasted.</span></div>
+    <div style="flex:1;display:grid;grid-template-columns:1.2fr 1fr;gap:18px;margin-top:14px;">
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div class="card-3d" style="padding:13px 16px;display:flex;align-items:center;gap:12px;"><div style="font-size:24px;width:36px;flex-shrink:0;">🌐</div><div style="flex:1;"><div style="font-size:15px;font-weight:600;color:var(--white);">PWA Web App — Buy · Sell · Rent · Agent · Admin</div><div style="font-size:13px;color:var(--white-40);margin-top:2px;">Saves $60–90K vs native iOS/Android apps</div></div><div style="font-size:14px;font-weight:600;color:var(--gold);">Core</div></div>
+        <div class="card-3d" style="padding:13px 16px;display:flex;align-items:center;gap:12px;"><div style="font-size:24px;width:36px;flex-shrink:0;">🤖</div><div style="flex:1;"><div style="font-size:15px;font-weight:600;color:var(--white);">AI Matching + Fair Value Engine™ + Rent Pricing AI</div></div><div style="font-size:14px;font-weight:600;color:var(--gold);">$18–24K</div></div>
+        <div class="card-3d" style="padding:13px 16px;display:flex;align-items:center;gap:12px;"><div style="font-size:24px;width:36px;flex-shrink:0;">🏠</div><div style="flex:1;"><div style="font-size:15px;font-weight:600;color:var(--white);">Lettings Module — Landlord + Tenant + Kind Pact™</div></div><div style="font-size:14px;font-weight:600;color:var(--gold);">$12–16K</div></div>
+        <div class="card-3d" style="padding:13px 16px;display:flex;align-items:center;gap:12px;"><div style="font-size:24px;width:36px;flex-shrink:0;">🔗</div><div style="flex:1;"><div style="font-size:15px;font-weight:600;color:var(--white);">DocuSign · Stripe · MLS · Mortgage API · Legal API</div></div><div style="font-size:14px;font-weight:600;color:var(--gold);">$10–16K</div></div>
+        <div class="card-3d" style="padding:13px 16px;display:flex;align-items:center;gap:12px;"><div style="font-size:24px;width:36px;flex-shrink:0;">🛡️</div><div style="flex:1;"><div style="font-size:15px;font-weight:600;color:var(--white);">AML Compliance + Legal Partner Portal</div></div><div style="font-size:14px;font-weight:600;color:var(--gold);">$6–10K</div></div>
+        <div class="card-3d" style="padding:13px 16px;display:flex;align-items:center;gap:12px;"><div style="font-size:24px;width:36px;flex-shrink:0;">📸</div><div style="flex:1;"><div style="font-size:15px;font-weight:600;color:var(--white);">Photography + 3D Tour Partner Network Module</div></div><div style="font-size:14px;font-weight:600;color:var(--gold);">$4–5K</div></div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:14px;">
+        <div class="card-3d gold-glow" style="flex:1;padding:22px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.12em;color:var(--white-40);margin-bottom:14px;">FULL BUDGET BREAKDOWN</div>
+          <div class="budget-row"><span class="br-lbl">Full-Stack Dev (8 months)</span><span class="br-val">$50K – $60K</span></div>
+          <div class="budget-row"><span class="br-lbl">AI/ML Engineer (5 months)</span><span class="br-val">$18K – $24K</span></div>
+          <div class="budget-row"><span class="br-lbl">Lettings Module Dev</span><span class="br-val">$12K – $16K</span></div>
+          <div class="budget-row"><span class="br-lbl">UI/UX Designer (4 months)</span><span class="br-val">$12K – $14K</span></div>
+          <div class="budget-row"><span class="br-lbl">QA / Testing</span><span class="br-val">$7K – $8K</span></div>
+          <div class="budget-row"><span class="br-lbl">Integrations + AML + Legal</span><span class="br-val">$10K – $16K</span></div>
+          <div class="budget-row"><span class="br-lbl">Photography + Cloud + Tools</span><span class="br-val">$8K – $11K</span></div>
+          <div class="budget-row"><span class="br-lbl">Contingency (10%)</span><span class="br-val">$15K</span></div>
+          <div class="budget-row total"><span class="br-lbl">TOTAL</span><span class="br-val total">~$175K</span></div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+          <div style="background:rgba(232,197,106,.08);border:1px solid var(--border-gold);border-radius:12px;padding:14px;text-align:center;"><div style="font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:var(--gold);">8 Mo</div><div style="font-size:13px;color:var(--white-40);margin-top:3px;">Launch timeline</div></div>
+          <div style="background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.2);border-radius:12px;padding:14px;text-align:center;"><div style="font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:var(--green);">25.7×</div><div style="font-size:13px;color:var(--white-40);margin-top:3px;">ROI by Month 30</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S8 TIMELINE -->
+<div class="slide" id="s8">
+  <div class="bg-grid"></div>
+  <div class="inner">
+    <div class="eyebrow"><span class="eyebrow-chip">07 · Build Timeline</span></div>
+    <div class="slide-title">Launch-ready in <span class="accent">7–8 months</span></div>
+    <div style="flex:1;display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:14px;">
+      <div style="display:flex;flex-direction:column;">
+        <div class="tl-item"><div class="tl-wk">Wk 1–3</div><div class="tl-gutter"><div class="tl-dot gold"></div><div class="tl-line"></div></div><div class="tl-card"><div class="tl-title">🏗 Architecture + Design Sprint<span class="phase-badge gold">PHASE 1</span></div><div class="tl-desc">System design · DB schema · Figma flows · MLS data contracts · Legal/mortgage API selection</div></div></div>
+        <div class="tl-item"><div class="tl-wk">Wk 4–16</div><div class="tl-gutter"><div class="tl-dot"></div><div class="tl-line"></div></div><div class="tl-card"><div class="tl-title">💻 Core PWA Development<span class="phase-badge">CORE BUILD</span></div><div class="tl-desc">Buy/Sell/Rent PWA + backend · Auth · Listing engine · All dashboards · Truth Layer™ · Transaction flow</div></div></div>
+        <div class="tl-item"><div class="tl-wk">Wk 6–14</div><div class="tl-gutter"><div class="tl-dot gold"></div><div class="tl-line"></div></div><div class="tl-card"><div class="tl-title">🤖 AI Suite (parallel)<span class="phase-badge gold">AI CORE</span></div><div class="tl-desc">Fair Value Engine™ · Smart matching ML · AI rent pricing · Buyer intent scoring</div></div></div>
+        <div class="tl-item"><div class="tl-wk">Wk 8–14</div><div class="tl-gutter"><div class="tl-dot"></div><div class="tl-line"></div></div><div class="tl-card" style="border-color:rgba(232,197,106,.25);background:rgba(232,197,106,.04);"><div class="tl-title">🏠 Lettings Module (parallel)<span class="phase-badge gold">NEW</span></div><div class="tl-desc">Landlord dashboard · Tenant flow · Kind Pact™ · Digital tenancy · AI rent pricing · Screening</div></div></div>
+      </div>
+      <div style="display:flex;flex-direction:column;">
+        <div class="tl-item"><div class="tl-wk">Wk 14–18</div><div class="tl-gutter"><div class="tl-dot"></div><div class="tl-line"></div></div><div class="tl-card" style="border-color:rgba(232,197,106,.25);background:rgba(232,197,106,.04);"><div class="tl-title">🔗 Integrations Suite<span class="phase-badge gold">NEW SCOPE</span></div><div class="tl-desc">DocuSign + Stripe + MLS · Mortgage API · Legal marketplace · AML compliance · Photography portal · Kindness Layer™</div></div></div>
+        <div class="tl-item"><div class="tl-wk">Wk 19–24</div><div class="tl-gutter"><div class="tl-dot"></div><div class="tl-line"></div></div><div class="tl-card"><div class="tl-title">🎨 Polish + QA + Security<span class="phase-badge">REFINEMENT</span></div><div class="tl-desc">Mobile optimization · Accessibility · Security pen-test · AML review · Full user journey testing</div></div></div>
+        <div class="tl-item"><div class="tl-wk">Wk 24–30</div><div class="tl-gutter"><div class="tl-dot"></div><div class="tl-line"></div></div><div class="tl-card"><div class="tl-title">📸 Soft Launch Prep<span class="phase-badge">PRE-LAUNCH</span></div><div class="tl-desc">Photography partner onboarding · 3–5 vetted agents · Legal partner contracts · MLS data live</div></div></div>
+        <div class="tl-item"><div class="tl-wk">Wk 30–34</div><div class="tl-gutter"><div class="tl-dot gold"></div></div><div class="tl-card launch"><div class="tl-title">🚀 LAUNCH — 1 City · Full Platform<span class="phase-badge gold">LIVE</span></div><div class="tl-desc">Buy · Sell · Rent flows active · AI pricing live · Mortgage + Legal marketplaces open · First Kind deals closed</div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S9 PROJECTIONS -->
+<div class="slide" id="s9">
+  <div class="bg-grid"></div><div class="orb orb-1"></div><div class="orb orb-2"></div>
+  <div class="inner" style="padding:40px 56px;">
+    <div class="eyebrow"><span class="eyebrow-chip">08 · Projections</span></div>
+    <div class="slide-title">$175K → <span class="accent">proven, scalable platform</span></div>
+    <div style="flex:1;display:grid;grid-template-columns:1.6fr 1fr;gap:22px;margin-top:12px;">
+      <div class="card-3d" style="padding:22px;display:flex;flex-direction:column;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--white-40);letter-spacing:.1em;margin-bottom:14px;">PROJECTED REVENUE · 3-YEAR RUNWAY · 5 STREAMS</div>
+        <svg width="100%" height="100%" viewBox="0 0 520 240" style="flex:1;">
+          <defs><linearGradient id="projArea" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="rgba(232,197,106,.2)"/><stop offset="100%" stop-color="rgba(232,197,106,0)"/></linearGradient><linearGradient id="projLine" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#3b82f6"/><stop offset="100%" stop-color="#e8c56a"/></linearGradient></defs>
+          <line x1="60" y1="10" x2="510" y2="10" stroke="rgba(255,255,255,.05)" stroke-width="1"/><line x1="60" y1="58" x2="510" y2="58" stroke="rgba(255,255,255,.05)" stroke-width="1"/><line x1="60" y1="106" x2="510" y2="106" stroke="rgba(255,255,255,.05)" stroke-width="1"/><line x1="60" y1="154" x2="510" y2="154" stroke="rgba(255,255,255,.05)" stroke-width="1"/><line x1="60" y1="200" x2="510" y2="200" stroke="rgba(255,255,255,.08)" stroke-width="1"/>
+          <text x="54" y="14" fill="rgba(255,255,255,.3)" font-size="8" font-family="JetBrains Mono" text-anchor="end">$5M</text><text x="54" y="110" fill="rgba(255,255,255,.3)" font-size="8" font-family="JetBrains Mono" text-anchor="end">$2.5M</text><text x="54" y="204" fill="rgba(255,255,255,.3)" font-size="8" font-family="JetBrains Mono" text-anchor="end">$0</text>
+          <path d="M90,199 L135,195 L178,188 L222,178 L264,163 L308,140 L354,100 L400,74 L445,38 L445,200 Z" fill="url(#projArea)"/>
+          <path class="line-anim" d="M90,199 L135,195 L178,188 L222,178 L264,163 L308,140 L354,100 L400,74 L445,38" fill="none" stroke="url(#projLine)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="90" cy="199" r="4" fill="#3b82f6"/><text x="90" y="192" fill="rgba(255,255,255,.4)" font-size="7" text-anchor="middle" font-family="JetBrains Mono">$50K</text>
+          <circle cx="264" cy="163" r="5" fill="#e8c56a"/><text x="264" y="157" fill="#e8c56a" font-size="8" font-weight="bold" text-anchor="middle" font-family="JetBrains Mono">$1.2M</text>
+          <circle cx="445" cy="38" r="6" fill="#e8c56a"/><text x="445" y="32" fill="#e8c56a" font-size="9" font-weight="bold" text-anchor="middle" font-family="JetBrains Mono">$4.5M</text>
+          <text x="90" y="218" fill="rgba(255,255,255,.25)" font-size="8" text-anchor="middle" font-family="JetBrains Mono">Mo 8</text><text x="264" y="218" fill="rgba(255,255,255,.25)" font-size="8" text-anchor="middle" font-family="JetBrains Mono">Mo 18</text><text x="445" y="218" fill="rgba(255,255,255,.25)" font-size="8" text-anchor="middle" font-family="JetBrains Mono">Mo 30</text>
+        </svg>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div class="kpi-card"><div class="kpi-val">5–10</div><div class="kpi-lbl">Deals at MVP Launch (Mo 8)</div><div class="kpi-note">1 city · buy + sell + 1st lets</div></div>
+        <div class="kpi-card"><div class="kpi-val">$1.2M</div><div class="kpi-lbl">Revenue at Month 18</div><div class="kpi-note">150 deals + lettings + mortgage</div></div>
+        <div class="kpi-card"><div class="kpi-val">$4.5M</div><div class="kpi-lbl">Year 3 (Month 30)</div><div class="kpi-note">500 deals · 5 cities · all streams</div></div>
+        <div class="kpi-card" style="border-color:rgba(16,185,129,.25);"><div class="kpi-val" style="color:var(--green);">25.7×</div><div class="kpi-lbl">ROI on $175K by Month 30</div><div class="kpi-note">$4.5M ÷ $175K investment</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S10 WHY NOW -->
+<div class="slide" id="s10">
+  <div class="bg-grid"></div><div class="orb orb-1"></div>
+  <div class="inner">
+    <div class="eyebrow"><span class="eyebrow-chip">09 · Why Now</span></div>
+    <div class="slide-title">The market just <span class="accent">cracked open.</span></div>
+    <div style="flex:1;display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px;">
+      <div class="card-3d" style="padding:24px;"><div style="font-size:34px;margin-bottom:12px;">⚖️</div><div style="font-size:18px;font-weight:700;color:var(--white);margin-bottom:8px;">NAR Settlement + BBC Expose</div><div style="font-size:15px;color:var(--white-40);line-height:1.7;">$418M NAR settlement failed — commissions <span style="color:var(--red);">still rose to 5.7%</span>. BBC exposed Purplebricks using pressure tactics. Consumer trust at all-time low — and all-time ready.</div></div>
+      <div class="card-3d" style="padding:24px;"><div style="font-size:34px;margin-bottom:12px;">🤖</div><div style="font-size:18px;font-weight:700;color:var(--white);margin-bottom:8px;">AI Moving From Buzzword → Infrastructure</div><div style="font-size:15px;color:var(--white-40);line-height:1.7;">PropTech CAGR 16.1%. AI in RE is now practical. First movers with genuine AI personalization — not marketing claims — will win. Neither Purplebricks nor Zillow have lifestyle-matching AI.</div></div>
+      <div class="card-3d" style="padding:24px;"><div style="font-size:34px;margin-bottom:12px;">🏠</div><div style="font-size:18px;font-weight:700;color:var(--white);margin-bottom:8px;">Frozen Market = Trust Deficit</div><div style="font-size:15px;color:var(--white-40);line-height:1.7;">Sales at <span style="color:var(--red);">30-year historic low</span>. Buyers aren't paralyzed by rates — they're paralyzed by <span style="color:var(--gold);">mistrust and opacity</span>. Kind RE solves the actual blocker.</div></div>
+      <div class="card-3d" style="padding:24px;"><div style="font-size:34px;margin-bottom:12px;">📊</div><div style="font-size:18px;font-weight:700;color:var(--white);margin-bottom:8px;">Competitors Exhausted</div><div style="font-size:15px;color:var(--white-40);line-height:1.7;">Redfin: sub-1% share. Opendoor: losing money. Purplebricks: sold for £1. Zillow: abandoned iBuying. <span style="color:var(--gold);">White space is open for a trust-native, lean, AI-first platform.</span></div></div>
+    </div>
+    <div style="margin-top:12px;padding:14px 20px;background:rgba(232,197,106,.06);border:1px solid var(--border-gold);border-radius:12px;display:flex;align-items:center;gap:14px;"><div style="font-size:26px;">💡</div><div style="font-size:15px;color:var(--white-70);line-height:1.6;"><strong style="color:var(--gold);">The window is open right now.</strong> Post-NAR confusion + BBC Purplebricks expose + AI infrastructure maturity + competitor exhaustion = a once-in-a-decade opportunity.</div></div>
+  </div>
+</div>
+
+<!-- S11 REVENUE MODEL -->
+<div class="slide" id="s11">
+  <div class="bg-grid"></div>
+  <div class="inner">
+    <div class="eyebrow"><span class="eyebrow-chip">10 · Revenue Model</span></div>
+    <div class="slide-title">Five streams. <span class="accent">Fair earnings.</span></div>
+    <div style="flex:1;display:grid;grid-template-columns:1.1fr 1fr;gap:18px;margin-top:14px;">
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div class="card-3d" style="padding:16px 20px;display:flex;gap:14px;"><div style="width:40px;height:40px;background:rgba(59,130,246,.15);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">📈</div><div><div style="font-size:16px;font-weight:700;color:var(--white);">Platform Transaction Fee <span class="tag tag-blue" style="margin-left:6px;">PRIMARY</span></div><div style="font-size:13px;color:var(--white-40);margin-top:3px;">2–3.5% per deal OR fixed fee. 500 deals/yr × $300K avg × 2.5% = <strong style="color:var(--gold);">$3.75M</strong></div></div></div>
+        <div class="card-3d" style="padding:16px 20px;display:flex;gap:14px;"><div style="width:40px;height:40px;background:rgba(232,197,106,.1);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">🏠</div><div><div style="font-size:16px;font-weight:700;color:var(--white);">Lettings Revenue <span class="tag tag-gold" style="margin-left:6px;">NEW</span></div><div style="font-size:13px;color:var(--white-40);margin-top:3px;">5% annual rent OR flat $499/yr. 200 landlords × $499 = <strong style="color:var(--gold);">$99.8K ARR</strong></div></div></div>
+        <div class="card-3d" style="padding:16px 20px;display:flex;gap:14px;"><div style="width:40px;height:40px;background:rgba(16,185,129,.1);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">🏦</div><div><div style="font-size:16px;font-weight:700;color:var(--white);">Mortgage Marketplace <span class="tag tag-green" style="margin-left:6px;">NEW</span></div><div style="font-size:13px;color:var(--white-40);margin-top:3px;">$300–$800 per referral · 60% attach rate · fully disclosed</div></div></div>
+        <div class="card-3d" style="padding:16px 20px;display:flex;gap:14px;"><div style="width:40px;height:40px;background:rgba(239,68,68,.1);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">⚖️</div><div><div style="font-size:16px;font-weight:700;color:var(--white);">Legal Marketplace <span class="tag tag-green" style="margin-left:6px;">NEW</span></div><div style="font-size:13px;color:var(--white-40);margin-top:3px;">$150–$400 per conveyancing referral · open competition · no lock-ins</div></div></div>
+        <div class="card-3d" style="padding:16px 20px;display:flex;gap:14px;"><div style="width:40px;height:40px;background:rgba(232,197,106,.1);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">🤝</div><div><div style="font-size:16px;font-weight:700;color:var(--white);">Agent Subscriptions + Kindness</div><div style="font-size:13px;color:var(--white-40);margin-top:3px;">$99–$299/mo per agent · 50 agents × $199 = <strong style="color:var(--gold);">$9.95K MRR</strong></div></div></div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:14px;">
+        <div class="card-3d" style="padding:16px 20px;flex:1;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--white-40);letter-spacing:.1em;margin-bottom:10px;">PHASED REVENUE</div>
+          <div style="display:flex;flex-direction:column;gap:4px;">
+            <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:14px;"><span style="color:var(--white-40);">Mo 8 — MVP Launch</span><span style="color:var(--blue-light);font-weight:600;">$50K</span></div>
+            <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:14px;"><span style="color:var(--white-40);">Mo 12 — Growth</span><span style="color:var(--blue-light);font-weight:600;">$540K</span></div>
+            <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:14px;"><span style="color:var(--white-40);">Mo 18 — Expansion</span><span style="color:var(--gold);font-weight:600;">$1.2M</span></div>
+            <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:14px;"><span style="color:var(--white-40);">Mo 24 — Scale</span><span style="color:var(--gold);font-weight:600;">$2.4M</span></div>
+            <div style="display:flex;justify-content:space-between;padding:6px 0;font-size:15px;font-weight:700;"><span style="color:var(--white);">Mo 30 — Full</span><span style="color:var(--gold);">$4.5M</span></div>
+          </div>
+        </div>
+        <div style="background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.2);border-radius:12px;padding:16px;text-align:center;"><div style="font-family:'Playfair Display',serif;font-size:38px;font-weight:700;color:var(--green);">25.7×</div><div style="font-size:13px;color:var(--white-40);margin-top:3px;">ROI on $175K · Mo 30</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S12 CLOSING -->
+<div class="slide" id="s12">
+  <div class="bg-grid"></div><div class="orb orb-1"></div><div class="orb orb-2"></div>
+  <div class="inner" style="justify-content:center;padding:48px 68px;">
+    <div style="display:flex;align-items:center;gap:14px;margin-bottom:22px;"><div style="width:48px;height:48px;background:linear-gradient(135deg,var(--blue-glow),var(--navy-soft));border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;">🏡</div><span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--white-40);letter-spacing:.14em;">KINDNESS COMMUNITY FOUNDATION · KCF LLC · 2026</span></div>
+    <div style="font-family:'Playfair Display',serif;font-size:clamp(38px,5.5vw,76px);font-weight:800;line-height:1.06;color:var(--white);margin-bottom:22px;">$175K. 8 Months.<br><em style="background:linear-gradient(135deg,var(--gold-bright),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">A Fairer World.</em></div>
+    <p style="font-size:18px;color:var(--white-40);max-width:640px;line-height:1.7;margin-bottom:32px;">We studied Purplebricks' $1B lesson. A platform that puts users first, makes fees transparent, keeps legal open, embeds mortgage choice without hidden commissions — and adds purpose no competitor can copy.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:12px;margin-bottom:30px;">
+      <div class="close-card"><div style="font-size:30px;margin-bottom:8px;">🎯</div><div style="font-size:16px;font-weight:700;color:var(--white);">Phase 1</div><div style="font-size:13px;color:var(--white-40);margin-top:4px;">1 city · 1–3 agents · 5–10 deals · proof of concept</div></div>
+      <div class="close-card"><div style="font-size:30px;margin-bottom:8px;">📈</div><div style="font-size:16px;font-weight:700;color:var(--white);">Mo 18</div><div style="font-size:13px;color:var(--white-40);margin-top:4px;">150 deals · $1.2M rev · lettings + 3 cities</div></div>
+      <div class="close-card"><div style="font-size:30px;margin-bottom:8px;">💚</div><div style="font-size:16px;font-weight:700;color:var(--white);">Promise</div><div style="font-size:13px;color:var(--white-40);margin-top:4px;">"No pressure. Fair price. Clear decisions."</div></div>
+      <div class="close-card" style="border-color:var(--border-gold);background:rgba(232,197,106,.06);"><div style="font-size:30px;margin-bottom:8px;">🚀</div><div style="font-size:16px;font-weight:700;color:var(--gold);">Next Step</div><div style="font-size:13px;color:rgba(232,197,106,.7);margin-top:4px;font-weight:600;">Green light → kickoff in 2 weeks</div></div>
+    </div>
+    <div style="font-family:'Playfair Display',serif;font-size:22px;font-style:italic;color:rgba(232,197,106,.5);">"Build trust → users stay. Open everything → no BBC scandal. Add meaning → the brand grows."</div>
+  </div>
+</div>
+
+</div>
+<div id="nav">
+  <button class="nav-btn" onclick="go(-1)">&#8592;</button>
+  <div id="dots"></div>
+  <span id="ctr">1/12</span>
+  <button class="nav-btn" onclick="go(1)">&#8594;</button>
+</div>
+<script>
+const slides=[...document.querySelectorAll('.slide')];
+const dotsEl=document.getElementById('dots');
+const ctrEl=document.getElementById('ctr');
+let cur=0,locked=false;
+slides.forEach((_,i)=>{const d=document.createElement('div');d.className='dot'+(i===0?' on':'');d.onclick=()=>goTo(i);dotsEl.appendChild(d);});
+function goTo(n){if(locked||n<0||n>=slides.length||n===cur)return;locked=true;slides[cur].classList.remove('active');slides[cur].classList.add('out');const prev=cur;cur=n;slides[cur].classList.add('active');document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('on',i===cur));ctrEl.textContent=(cur+1)+'/'+slides.length;setTimeout(()=>{slides[prev].classList.remove('out');locked=false;},700);setTimeout(()=>{slides[cur].querySelectorAll('.bar-rise').forEach((b,i)=>{b.style.animation='none';b.offsetHeight;b.style.animation=`riseUp .8s cubic-bezier(.4,0,.2,1) forwards ${i*.08}s`;});slides[cur].querySelectorAll('.line-anim').forEach(l=>{l.style.strokeDashoffset='3000';l.offsetHeight;l.style.animation='none';l.offsetHeight;l.style.animation='drawLine 2s ease forwards .3s';});},100);}
+function go(d){goTo(cur+d);}
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();go(1);}if(e.key==='ArrowLeft'){e.preventDefault();go(-1);}});
+let tx=0;
+document.addEventListener('touchstart',e=>tx=e.touches[0].clientX,{passive:true});
+document.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>50)go(dx<0?1:-1);},{passive:true});
+</script>
+</body>
+</html>
