@@ -1181,7 +1181,13 @@ footer {
 .compare-header-trad { color: #ef4444 !important; }
 .compare-header-purple { color: #a78bfa !important; }
 .compare-header-kind { color: var(--gold) !important; }
-.compare-wrap { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; }
+/* ── Compare table: scrollable on mobile ── */
+@media(max-width: 700px) {
+  .compare-table { min-width: 520px; }
+  .compare-table th, .compare-table td { padding: 10px 12px; font-size: 12px; }
+  .compare-wrap::after { content: '← swipe to compare →'; display: block; text-align: center; font-size: 11px; color: var(--gray); padding: 8px 0; letter-spacing: 0.08em; text-transform: uppercase; }
+}
+.compare-wrap { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; }
 
 /* ── EIGHT PILLARS ── */
 .pillars-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; }
@@ -1619,12 +1625,22 @@ img, video, canvas, iframe { max-width: 100%; }
   .tab-btn { padding: 8px 14px; font-size: 12px; white-space: nowrap; }
 }
 
-/* ── Audience segments ── */
-@media(max-width: 480px) {
-  .segments { grid-template-columns: 1fr 1fr; }
-  .seg-card { padding: 24px 12px; }
+/* ── Audience segments: horizontal scroll on mobile ── */
+@media(max-width: 640px) {
+  .segments {
+    display: flex; overflow-x: auto; scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    background: transparent; gap: 10px;
+    padding: 0 16px 12px; margin-left: -16px; margin-right: -16px; margin-bottom: 48px;
+  }
+  .segments::-webkit-scrollbar { display: none; }
+  .seg-card {
+    min-width: 150px; max-width: 150px; flex-shrink: 0;
+    scroll-snap-align: start; border-radius: 12px;
+    border: 1px solid var(--border); padding: 20px 12px;
+  }
   .seg-img { width: 60px; height: 60px; }
-  .seg-name { font-size: 16px; }
+  .seg-name { font-size: 15px; }
   .seg-desc { font-size: 11px; }
 }
 
@@ -1635,6 +1651,7 @@ img, video, canvas, iframe { max-width: 100%; }
   .heat-stats { grid-template-columns: 1fr 1fr; gap: 10px; }
   .heat-stat { padding: 14px 10px; }
   .heat-stat-num { font-size: 20px; }
+  .heat-stats .heat-stat:last-child:nth-child(odd) { grid-column: 1 / -1; }
 }
 
 /* ── Pricing ── */
@@ -1704,7 +1721,7 @@ img, video, canvas, iframe { max-width: 100%; }
 
 /* ── FOMO bar — smaller on mobile ── */
 @media(max-width: 480px) {
-  .fomo-bar { left: 12px; right: 12px; max-width: calc(100% - 24px); bottom: 16px; }
+  .fomo-bar { display: none !important; } /* replaced by sticky CTA on mobile */
   .fomo-text { font-size: 12px; }
 }
 
@@ -2019,6 +2036,28 @@ body { overflow-x: hidden !important; }
   .price-card.popular { transform: scale(1); }
   .two-col-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
 }
+
+/* ── Mobile sticky CTA ── */
+#mobileStickyCTA {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 997;
+  padding: 10px 16px env(safe-area-inset-bottom, 16px);
+  background: rgba(10,9,8,0.97);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(196,151,90,0.2);
+  transform: translateY(100%);
+  transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
+}
+#mobileStickyCTA.visible { transform: translateY(0); }
+#mobileStickyCTA .ms-btn {
+  display: block; width: 100%; padding: 15px;
+  background: var(--gold); color: var(--navy);
+  text-align: center; border-radius: 4px;
+  font-size: 14px; font-weight: 700;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  text-decoration: none; border: none; cursor: pointer;
+}
+#mobileStickyCTA .ms-sub { text-align: center; font-size: 11px; color: var(--gray); margin-top: 6px; letter-spacing: 0.04em; }
+@media(min-width: 768px) { #mobileStickyCTA { display: none !important; } }
 
 </style>
 </head>
@@ -3913,6 +3952,12 @@ body { overflow-x: hidden !important; }
   </div>
 </footer>
 
+<!-- MOBILE STICKY CTA -->
+<div id="mobileStickyCTA">
+  <a href="#" class="ms-btn" onclick="openStepInsideModal();return false;">✦ Get Started — Free, No Commitment</a>
+  <div class="ms-sub">Verified agents · 2.5% flat fee · No pressure</div>
+</div>
+
 <!-- FOMO BAR -->
 <div class="fomo-bar" id="fomoBar">
   <div class="fomo-dot"></div>
@@ -4367,6 +4412,19 @@ function showFomo() {
   fomoIdx++;
 }
 setTimeout(() => { showFomo(); setInterval(showFomo, 8000); }, 3000);
+
+// ── MOBILE STICKY CTA ──
+(function() {
+  if (window.innerWidth >= 768) return;
+  const bar = document.getElementById('mobileStickyCTA');
+  if (!bar) return;
+  const heroH = (document.querySelector('.hero')?.offsetHeight || 800);
+  document.body.addEventListener('scroll', function() {
+    const st = document.body.scrollTop;
+    if (st > heroH * 0.6) bar.classList.add('visible');
+    else bar.classList.remove('visible');
+  }, { passive: true });
+})();
 
 // ── RESPONSIVE INVEST GRID ──
 function checkInvestGrid() {
