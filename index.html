@@ -2026,6 +2026,130 @@ img, video, canvas, iframe { max-width: 100%; }
 /* ── Prevent any body horizontal scroll ── */
 body { overflow-x: hidden !important; }
 
+/* ── Step Inside 2-step modal ── */
+.si-submit-btn {
+  width: 100%; padding: 16px; border-radius: 14px;
+  background: linear-gradient(135deg, #c4975a, #a07840);
+  border: none; color: #0c0b09; font-size: 16px; font-weight: 700;
+  cursor: pointer; letter-spacing: 0.02em;
+}
+.si-goal-btn {
+  padding: 16px 20px; border-radius: 8px; cursor: pointer;
+  border: 1px solid rgba(196,151,90,0.2); background: rgba(255,255,255,0.03);
+  color: var(--cream); font-size: 15px; font-weight: 500;
+  transition: all 0.2s; margin-bottom: 10px; text-align: left;
+}
+.si-goal-btn:hover { border-color: rgba(196,151,90,0.5); background: rgba(196,151,90,0.08); }
+.si-goal-btn.selected { border-color: var(--gold); background: rgba(196,151,90,0.12); color: var(--gold); }
+
+/* ── AI CHAT WIDGET ── */
+#chatBtn {
+  position: fixed; bottom: 88px; right: 24px; z-index: 990;
+  width: 56px; height: 56px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), var(--gold-dim));
+  border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 8px 32px rgba(196,151,90,0.45);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+#chatBtn:hover { transform: scale(1.1); box-shadow: 0 12px 40px rgba(196,151,90,0.6); }
+#chatBtn svg { width: 24px; height: 24px; fill: var(--navy); }
+.chat-notif {
+  position: absolute; top: -4px; right: -4px;
+  width: 18px; height: 18px; border-radius: 50%;
+  background: #ef4444; border: 2px solid var(--navy);
+  font-size: 10px; color: white; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+#chatWindow {
+  position: fixed; bottom: 160px; right: 24px; z-index: 991;
+  width: 360px; max-height: 520px;
+  background: var(--navy-light);
+  border: 1px solid rgba(196,151,90,0.18);
+  border-radius: 16px;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.7);
+  display: flex; flex-direction: column;
+  overflow: hidden;
+  transform: scale(0.92) translateY(16px); opacity: 0; pointer-events: none;
+  transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), opacity 0.25s ease;
+}
+#chatWindow.open { transform: scale(1) translateY(0); opacity: 1; pointer-events: all; }
+.chat-header {
+  padding: 14px 16px;
+  background: linear-gradient(135deg, rgba(196,151,90,0.12), rgba(196,151,90,0.04));
+  border-bottom: 1px solid rgba(196,151,90,0.12);
+  display: flex; align-items: center; justify-content: space-between;
+  flex-shrink: 0;
+}
+.chat-header-left { display: flex; align-items: center; gap: 10px; }
+.chat-avatar {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), var(--gold-dim));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; flex-shrink: 0;
+}
+.chat-header-info .chat-name { font-size: 14px; font-weight: 600; color: var(--cream); }
+.chat-header-info .chat-status { font-size: 11px; color: #34d399; display: flex; align-items: center; gap: 4px; }
+.chat-status-dot { width: 6px; height: 6px; border-radius: 50%; background: #34d399; animation: pulse 2s infinite; }
+.chat-close { background: none; border: none; color: var(--gray); cursor: pointer; font-size: 18px; padding: 4px; line-height: 1; }
+.chat-close:hover { color: var(--cream); }
+.chat-messages {
+  flex: 1; overflow-y: auto; padding: 16px;
+  display: flex; flex-direction: column; gap: 10px;
+  scrollbar-width: thin; scrollbar-color: rgba(196,151,90,0.2) transparent;
+}
+.chat-messages::-webkit-scrollbar { width: 4px; }
+.chat-messages::-webkit-scrollbar-thumb { background: rgba(196,151,90,0.2); border-radius: 2px; }
+.chat-bubble { max-width: 82%; padding: 10px 14px; border-radius: 12px; font-size: 13px; line-height: 1.6; }
+.chat-bubble.bot { background: rgba(255,255,255,0.06); color: var(--cream); border-bottom-left-radius: 4px; align-self: flex-start; }
+.chat-bubble.user { background: var(--gold); color: var(--navy); border-bottom-right-radius: 4px; align-self: flex-end; font-weight: 500; }
+.chat-typing { display: flex; gap: 4px; align-items: center; padding: 10px 14px; }
+.chat-typing span { width: 7px; height: 7px; border-radius: 50%; background: var(--gray); animation: typingDot 1.2s infinite; }
+.chat-typing span:nth-child(2) { animation-delay: 0.2s; }
+.chat-typing span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes typingDot { 0%,60%,100%{opacity:0.3;transform:scale(1)} 30%{opacity:1;transform:scale(1.3)} }
+.chat-quick-replies { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+.chat-qr {
+  padding: 6px 12px; border-radius: 20px; font-size: 12px;
+  border: 1px solid rgba(196,151,90,0.25); color: var(--gold);
+  background: rgba(196,151,90,0.06); cursor: pointer; transition: all 0.2s;
+}
+.chat-qr:hover { background: rgba(196,151,90,0.15); border-color: var(--gold); }
+.chat-input-row {
+  padding: 12px; border-top: 1px solid rgba(196,151,90,0.1);
+  display: flex; gap: 8px; align-items: center; flex-shrink: 0;
+  background: rgba(12,11,9,0.5);
+}
+#chatInput {
+  flex: 1; padding: 10px 14px; border-radius: 24px;
+  background: rgba(255,255,255,0.05); border: 1px solid rgba(196,151,90,0.15);
+  color: var(--cream); font-size: 13px; outline: none;
+  transition: border-color 0.2s;
+}
+#chatInput:focus { border-color: rgba(196,151,90,0.4); }
+#chatInput::placeholder { color: var(--gray); }
+#chatSendBtn {
+  width: 36px; height: 36px; border-radius: 50%; border: none;
+  background: var(--gold); color: var(--navy);
+  cursor: pointer; font-size: 16px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s, transform 0.15s; flex-shrink: 0;
+}
+#chatSendBtn:hover { background: var(--gold-light); transform: scale(1.05); }
+#chatVoiceBtn {
+  width: 36px; height: 36px; border-radius: 50%; border: none;
+  background: rgba(255,255,255,0.06); color: var(--gray);
+  cursor: pointer; font-size: 16px;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s; flex-shrink: 0;
+}
+#chatVoiceBtn:hover { background: rgba(196,151,90,0.1); color: var(--gold); }
+#chatVoiceBtn.recording { background: rgba(239,68,68,0.15); color: #ef4444; animation: pulse 1s infinite; }
+@media(max-width:480px){
+  #chatWindow { width: calc(100vw - 24px); right: 12px; bottom: 130px; }
+  #chatBtn { bottom: 78px; right: 16px; }
+}
+
 /* ── Tablet layout (768–1100px) ── */
 @media(min-width: 641px) and (max-width: 900px) {
   .hero-inner { padding: 0 32px; }
@@ -2206,9 +2330,9 @@ body { overflow-x: hidden !important; }
       <!-- Social proof strip -->
       <div class="hero-social-proof">
         <div class="hero-thumb-stack">
-          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=80&q=80&auto=format&fit=crop&face" alt="">
-          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&q=80&auto=format&fit=crop&face" alt="">
-          <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=80&q=80&auto=format&fit=crop&face" alt="">
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=80&q=80&auto=format&fit=crop&face" alt="" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&q=80&auto=format&fit=crop&face" alt="" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=80&q=80&auto=format&fit=crop&face" alt="" loading="lazy">
         </div>
         <div class="hero-proof-text">
           <strong>23 California families</strong> found their home this month through Kind
@@ -2255,17 +2379,17 @@ body { overflow-x: hidden !important; }
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;">
       <div style="position:relative;border-radius:10px;overflow:hidden;height:240px;">
-        <img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?w=600&q=80&auto=format&fit=crop" alt="Family in warm kitchen" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?w=600&q=80&auto=format&fit=crop" alt="Family in warm kitchen" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy">
         <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(12,11,9,0.7) 0%,transparent 55%);"></div>
         <div style="position:absolute;bottom:16px;left:16px;font-size:12px;color:var(--cream);font-weight:500;">Bought in Pasadena · 18 days</div>
       </div>
       <div style="position:relative;border-radius:10px;overflow:hidden;height:240px;">
-        <img src="https://images.unsplash.com/photo-1560184897-ae75f418493e?w=600&q=80&auto=format&fit=crop" alt="Couple at new home" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <img src="https://images.unsplash.com/photo-1560184897-ae75f418493e?w=600&q=80&auto=format&fit=crop" alt="Couple at new home" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy">
         <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(12,11,9,0.7) 0%,transparent 55%);"></div>
         <div style="position:absolute;bottom:16px;left:16px;font-size:12px;color:var(--cream);font-weight:500;">Sold in Santa Monica · No pressure</div>
       </div>
       <div style="position:relative;border-radius:10px;overflow:hidden;height:240px;">
-        <img src="https://images.unsplash.com/photo-1600210492493-0946911123ea?w=600&q=80&auto=format&fit=crop" alt="Modern living room" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <img src="https://images.unsplash.com/photo-1600210492493-0946911123ea?w=600&q=80&auto=format&fit=crop" alt="Modern living room" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy">
         <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(12,11,9,0.7) 0%,transparent 55%);"></div>
         <div style="position:absolute;bottom:16px;left:16px;font-size:12px;color:var(--cream);font-weight:500;">Rented in Silver Lake · Found in 5 days</div>
       </div>
@@ -2312,6 +2436,26 @@ body { overflow-x: hidden !important; }
     </div>
   </div>
 </section>
+
+<!-- SOCIAL PROOF STRIP -->
+<div style="background:#0c0b09;padding:32px 24px;border-bottom:1px solid rgba(196,151,90,0.08);">
+  <div style="max-width:1000px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:48px;flex-wrap:wrap;">
+    <div style="text-align:center;">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300;color:var(--gold);line-height:1;">4.9★</div>
+      <div style="font-size:11px;color:var(--gray);margin-top:4px;letter-spacing:0.06em;text-transform:uppercase;">Avg. client rating</div>
+    </div>
+    <div style="width:1px;height:40px;background:var(--border);"></div>
+    <div style="max-width:320px;">
+      <div style="font-size:14px;color:var(--cream-dim);line-height:1.7;font-style:italic;">"The agent actually listened to what we wanted. No pressure, no upselling. We found our home in 11 days."</div>
+      <div style="font-size:12px;color:var(--gray);margin-top:8px;">— Priya &amp; Daniel, Pasadena CA · Bought Mar 2026</div>
+    </div>
+    <div style="width:1px;height:40px;background:var(--border);"></div>
+    <div style="max-width:280px;">
+      <div style="font-size:14px;color:var(--cream-dim);line-height:1.7;font-style:italic;">"Transparent from day one. We knew every cost before we signed anything."</div>
+      <div style="font-size:12px;color:var(--gray);margin-top:8px;">— Marcus T., Santa Monica CA · Sold Feb 2026</div>
+    </div>
+  </div>
+</div>
 
 <div class="gradient-div"></div>
 
@@ -2378,11 +2522,11 @@ body { overflow-x: hidden !important; }
       <h2 class="section-title">Built for Every<br><span style="color:var(--gold)">Kind</span> of Explorer</h2>
     </div>
     <div class="segments fade-up">
-      <div class="seg-card"><img class="seg-img" src="https://images.unsplash.com/photo-1628277613967-6abca504d0ac?w=200&q=80&auto=format&fit=crop" alt="Buyers"><div class="seg-name">Buyers</div><div class="seg-desc">Find your dream California home through experience, not static photos</div></div>
-      <div class="seg-card"><img class="seg-img" src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=200&q=80&auto=format&fit=crop" alt="Renters"><div class="seg-name">Renters</div><div class="seg-desc">Walk through before you commit. Compare neighbourhoods live.</div></div>
-      <div class="seg-card"><img class="seg-img" src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=200&q=80&auto=format&fit=crop" alt="Investors"><div class="seg-name">Investors</div><div class="seg-desc">AI heatmaps, ROI analytics, and California market signals</div></div>
-      <div class="seg-card"><img class="seg-img" src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=200&q=80&auto=format&fit=crop" alt="Digital Nomads"><div class="seg-name">Digital Nomads</div><div class="seg-desc">Book CA stays, explore remotely, and feel at home anywhere</div></div>
-      <div class="seg-card"><img class="seg-img" src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&q=80&auto=format&fit=crop" alt="Agents"><div class="seg-name">Agents</div><div class="seg-desc">Host live 3D open houses. Reach qualified CA clients globally.</div></div>
+      <div class="seg-card"><img class="seg-img" src="https://images.unsplash.com/photo-1628277613967-6abca504d0ac?w=200&q=80&auto=format&fit=crop" alt="Buyers" loading="lazy"><div class="seg-name">Buyers</div><div class="seg-desc">Find your dream California home through experience, not static photos</div></div>
+      <div class="seg-card"><img class="seg-img" src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=200&q=80&auto=format&fit=crop" alt="Renters" loading="lazy"><div class="seg-name">Renters</div><div class="seg-desc">Walk through before you commit. Compare neighbourhoods live.</div></div>
+      <div class="seg-card"><img class="seg-img" src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=200&q=80&auto=format&fit=crop" alt="Investors" loading="lazy"><div class="seg-name">Investors</div><div class="seg-desc">AI heatmaps, ROI analytics, and California market signals</div></div>
+      <div class="seg-card"><img class="seg-img" src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=200&q=80&auto=format&fit=crop" alt="Digital Nomads" loading="lazy"><div class="seg-name">Digital Nomads</div><div class="seg-desc">Book CA stays, explore remotely, and feel at home anywhere</div></div>
+      <div class="seg-card"><img class="seg-img" src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&q=80&auto=format&fit=crop" alt="Agents" loading="lazy"><div class="seg-name">Agents</div><div class="seg-desc">Host live 3D open houses. Reach qualified CA clients globally.</div></div>
     </div>
   </div>
 </section>
@@ -3285,7 +3429,7 @@ body { overflow-x: hidden !important; }
     </div>
     <div class="agent-grid fade-up">
       <div class="agent-card">
-        <img class="agent-avatar" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&q=80&auto=format&fit=crop" alt="Sarah Chen — Kind Real Estate Senior Agent, Beverly Hills CA">
+        <img class="agent-avatar" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&q=80&auto=format&fit=crop" alt="Sarah Chen — Kind Real Estate Senior Agent, Beverly Hills CA" loading="lazy">
         <div class="agent-name">Jessica Martinez</div>
         <div class="agent-location">Newport Beach · Orange County, CA</div>
         <div class="kindness-score-badge">
@@ -3299,7 +3443,7 @@ body { overflow-x: hidden !important; }
         </div>
       </div>
       <div class="agent-card">
-        <img class="agent-avatar" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80&auto=format&fit=crop" alt="Agent">
+        <img class="agent-avatar" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80&auto=format&fit=crop" alt="Agent" loading="lazy">
         <div class="agent-name">David Chen</div>
         <div class="agent-location">Beverly Hills · Los Angeles, CA</div>
         <div class="kindness-score-badge">
@@ -3313,7 +3457,7 @@ body { overflow-x: hidden !important; }
         </div>
       </div>
       <div class="agent-card">
-        <img class="agent-avatar" src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=200&q=80&auto=format&fit=crop" alt="Agent">
+        <img class="agent-avatar" src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=200&q=80&auto=format&fit=crop" alt="Agent" loading="lazy">
         <div class="agent-name">Priya Sharma</div>
         <div class="agent-location">Santa Monica · West LA, CA</div>
         <div class="kindness-score-badge">
@@ -3334,6 +3478,31 @@ body { overflow-x: hidden !important; }
 </section>
 
 <div class="gradient-div"></div>
+
+<!-- TRUST MICRO-BAR -->
+<div style="background:#0c0b09;border-top:1px solid rgba(196,151,90,0.08);border-bottom:1px solid rgba(196,151,90,0.08);padding:20px 24px;">
+  <div style="max-width:900px;margin:0 auto;display:flex;justify-content:center;align-items:center;gap:40px;flex-wrap:wrap;">
+    <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:var(--cream-dim);">
+      <span style="color:var(--gold);font-size:18px;">✓</span>
+      <span>No hidden fees — ever</span>
+    </div>
+    <div style="width:1px;height:24px;background:var(--border);flex-shrink:0;"></div>
+    <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:var(--cream-dim);">
+      <span style="color:var(--gold);font-size:18px;">✓</span>
+      <span>Cancel anytime, no tie-ins</span>
+    </div>
+    <div style="width:1px;height:24px;background:var(--border);flex-shrink:0;"></div>
+    <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:var(--cream-dim);">
+      <span style="color:var(--gold);font-size:18px;">✓</span>
+      <span>Verified agents only</span>
+    </div>
+    <div style="width:1px;height:24px;background:var(--border);flex-shrink:0;"></div>
+    <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:var(--cream-dim);">
+      <span style="color:var(--gold);font-size:18px;">✓</span>
+      <span>Save avg. £26K vs. traditional agents</span>
+    </div>
+  </div>
+</div>
 
 <!-- PRICING -->
 <section id="pricing">
@@ -3735,7 +3904,7 @@ body { overflow-x: hidden !important; }
 <section id="about" class="kindness-section">
   <div class="section-inner">
     <div class="kindness-inner fade-up">
-      <img class="kindness-icon" src="https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=200&q=80&auto=format&fit=crop" alt="Community Impact" style="width:120px;height:120px;border-radius:50%;object-fit:cover;border:3px solid rgba(232,197,106,0.4);box-shadow:0 0 40px rgba(232,197,106,0.2);">
+      <img class="kindness-icon" src="https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=200&q=80&auto=format&fit=crop" alt="Community Impact" style="width:120px;height:120px;border-radius:50%;object-fit:cover;border:3px solid rgba(232,197,106,0.4);box-shadow:0 0 40px rgba(232,197,106,0.2);" loading="lazy">
       <div class="section-label" style="justify-content:center;">The Kindness Layer™</div>
       <h2 class="section-title">Real Estate That<br>Gives <span style="color:var(--gold)">Back</span></h2>
       <p style="font-size:17px;color:var(--gray);line-height:1.75;margin-bottom:16px;">Kind Real Estate is an initiative of Kindness Community Foundation (KCF LLC) — a Newport Beach-based organisation built around one idea: that how you treat people during the biggest financial decision of their life actually matters.</p>
@@ -3931,6 +4100,7 @@ body { overflow-x: hidden !important; }
       <div class="footer-col">
         <h4>Company</h4>
         <ul>
+          <li><a href="tel:+19494001234">📞 (949) 400-1234</a></li>
           <li><a href="https://kindnesscommunityfoundation.com/" target="_blank">KCF Foundation</a></li>
           <li><a href="#">About</a></li>
           <li><a href="#">Careers</a></li>
@@ -3951,6 +4121,34 @@ body { overflow-x: hidden !important; }
     </div>
   </div>
 </footer>
+
+<!-- AI CHAT WIDGET -->
+<button id="chatBtn" onclick="toggleChat()" aria-label="Open chat">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
+  </svg>
+  <div class="chat-notif" id="chatNotif" style="display:none;">1</div>
+</button>
+
+<div id="chatWindow" role="dialog" aria-label="Kind Real Estate Chat">
+  <div class="chat-header">
+    <div class="chat-header-left">
+      <div class="chat-avatar">K</div>
+      <div class="chat-header-info">
+        <div class="chat-name">Kind AI Guide</div>
+        <div class="chat-status"><span class="chat-status-dot"></span> Online · Replies instantly</div>
+      </div>
+    </div>
+    <button class="chat-close" onclick="toggleChat()" aria-label="Close chat">✕</button>
+  </div>
+  <div class="chat-messages" id="chatMessages"></div>
+  <div class="chat-input-row">
+    <button id="chatVoiceBtn" onclick="toggleVoice()" title="Voice input" aria-label="Voice input">🎤</button>
+    <input id="chatInput" type="text" placeholder="Ask anything about Kind RE..." autocomplete="off"
+      onkeydown="if(event.key==='Enter')sendChatMessage()">
+    <button id="chatSendBtn" onclick="sendChatMessage()" aria-label="Send message">➤</button>
+  </div>
+</div>
 
 <!-- MOBILE STICKY CTA -->
 <div id="mobileStickyCTA">
@@ -4272,20 +4470,37 @@ function closeStepInsideModal() {
   m.style.opacity='0'; m.style.transition='opacity 0.25s';
   setTimeout(() => { m.style.display='none'; m.style.opacity=''; m.style.transition=''; document.body.style.overflow=''; }, 260);
 }
+let siSelectedGoal = '';
+function selectSiGoal(el, goal) {
+  siSelectedGoal = goal;
+  document.querySelectorAll('.si-goal-btn').forEach(b => b.classList.remove('selected'));
+  el.classList.add('selected');
+  const btn = document.getElementById('siStep1Next');
+  if (btn) { btn.disabled = false; btn.style.opacity = '1'; btn.style.cursor = 'pointer'; }
+}
+function goToSiStep2() {
+  if (!siSelectedGoal) return;
+  document.getElementById('siStep1').style.display = 'none';
+  document.getElementById('siStep2').style.display = 'block';
+}
+function backToSiStep1() {
+  document.getElementById('siStep2').style.display = 'none';
+  document.getElementById('siStep1').style.display = 'block';
+}
 function toggleSiGoal(el) {
-  ['si-buy','si-sell','si-rent','si-invest'].forEach(id => {
-    const btn = document.getElementById(id);
-    if (!btn) return;
-    const active = btn === el;
-    btn.style.background = active ? 'rgba(196,151,90,0.18)' : 'rgba(255,255,255,0.04)';
-    btn.style.borderColor = active ? 'rgba(196,151,90,0.5)' : 'rgba(255,255,255,0.08)';
-    btn.style.color = active ? 'var(--gold)' : 'rgba(240,236,228,0.5)';
-  });
+  // legacy no-op — replaced by selectSiGoal
 }
 function submitStepInside() {
-  const email = document.getElementById('si-email')?.value;
+  const email = document.getElementById('siEmail')?.value;
   if (!email || !email.includes('@')) { showToast('⚠️ Please enter a valid email address'); return; }
   closeStepInsideModal();
+  // reset modal state
+  siSelectedGoal = '';
+  document.querySelectorAll('.si-goal-btn').forEach(b => b.classList.remove('selected'));
+  const nextBtn = document.getElementById('siStep1Next');
+  if (nextBtn) { nextBtn.disabled = true; nextBtn.style.opacity = '0.4'; nextBtn.style.cursor = 'not-allowed'; }
+  document.getElementById('siStep1').style.display = 'block';
+  document.getElementById('siStep2').style.display = 'none';
   setTimeout(() => showToast('✦ You\'re on the list! We\'ll be in touch when we launch. Welcome to Kind RE.'), 300);
 }
 
@@ -4482,6 +4697,235 @@ document.querySelectorAll('[id^="ptab-"]').forEach(btn => {
   btn.addEventListener('click', () => trackEvent('pricing_tab', 'engagement', btn.id));
 });
 
+// ── AI CHAT WIDGET ──
+const chatKB = [
+  {k:['price','pricing','fee','fees','cost','costs','commission','how much','charge','2.5','flat','transparent','money','expensive','cheap','affordable','saving','save'],
+   a:"Our commission is a flat 2.5% — compared to the industry average of 5.7%. On an $850K California home, that's a saving of over $26,000. No hidden fees, no tie-ins, ever. You can see a full cost breakdown before signing anything."},
+  {k:['buy','buying','purchase','find home','find a home','want to buy','home buyer','first time','first-time'],
+   a:"Buying with Kind is a 4-step journey: 1) Describe what you want in plain words. 2) Explore properties at your own pace. 3) Your dedicated guide flags what matters. 4) We coordinate legal, mortgage, inspections — everything. No pressure to decide quickly."},
+  {k:['sell','selling','list','listed','list my home','list my property','i want to sell','seller'],
+   a:"Selling with Kind: we assign you a verified, ethics-checked agent, set transparent pricing, handle viewings and negotiations, and only charge 2.5% on completion. No upfront fees. You keep more of your money."},
+  {k:['rent','renting','rental','tenant','landlord','lettings','lease'],
+   a:"We have a full lettings platform for both tenants and landlords. Tenants can explore virtually before visiting. Landlords get transparent fee structures, tenant vetting, and a dedicated lettings guide."},
+  {k:['invest','investment','investor','roi','returns','rental yield','portfolio','yield','income'],
+   a:"Our investment tools include AI heatmaps, rental yield calculators, market signals across California, and ROI analytics. Your guide will help you assess each opportunity without pressure."},
+  {k:['agent','guide','who','assigned','verified','ethics','kindness score','staff','team'],
+   a:"Every agent on Kind is verified — we check their licence, track record, and ethics score. You're assigned a dedicated guide for your entire journey, from first search to keys in hand. No cold calls, no pushy tactics."},
+  {k:['mortgage','finance','loan','lender','interest rate','borrow','down payment'],
+   a:"We have a transparent mortgage marketplace with multiple lenders. Unlike traditional agents who take hidden referral fees, we show you all options openly. We also have a True Cost Calculator so you know the real monthly number before you decide."},
+  {k:['legal','conveyancing','solicitor','contract','lawyer','attorney','paperwork'],
+   a:"We have an open legal marketplace — no forced conveyancing partners, no tie-ins. You choose your solicitor from our verified network or bring your own. No penalties for choosing your own legal team."},
+  {k:['california','ca','los angeles','la','san francisco','sf','san diego','malibu','beverly hills','newport','pasadena','where','location','area','city'],
+   a:"We're California-first! We cover the full state — Los Angeles, Beverly Hills, Malibu, Santa Monica, San Francisco, San Diego, Newport Beach, Pasadena, and everywhere in between. Local market knowledge built in."},
+  {k:['how long','timeline','days','weeks','close','completion','fast','quickly','time','process'],
+   a:"Our average time to close is 14 days — compared to the 45-day industry average. We move faster because your guide coordinates everything in parallel: legal, mortgage, inspections, paperwork."},
+  {k:['start','get started','begin','how do i','first step','sign up','register','join','early access','waitlist'],
+   a:"Getting started is free and takes 30 seconds. Hit the 'Step Inside' button, choose what you're looking to do (buy/sell/rent/invest), and we'll match you with a verified guide who specialises in exactly that. No commitment, no spam."},
+  {k:['kcf','kindness','foundation','charity','giving back','community','social','impact'],
+   a:"Kind Real Estate is an initiative of the Kindness Community Foundation (KCF LLC) based in Newport Beach, CA. A share of every completed transaction is reinvested into housing access programmes — helping first-time buyers and underserved communities navigate real estate."},
+  {k:['app','mobile','phone','ios','android','download'],
+   a:"Our mobile app is coming soon for iOS and Android! You can join the waitlist — early access members get priority booking and locked-in transparent pricing. Drop your email via the Step Inside button above."},
+  {k:['contact','speak','call','phone','talk','human','person','real person','reach','email','message'],
+   a:"You can reach our team at 📞 (949) 400-1234 or use the Step Inside button to request a callback. A real human will get back to you — typically within 2 hours during business hours (9am–6pm PT)."},
+  {k:['virtual','3d','tour','view online','see online','explore','walkthrough','video'],
+   a:"You can explore properties virtually — room by room — before visiting in person. Our virtual tours let you see the living room, kitchen, bedrooms, and neighbourhood context, all from your phone or laptop."},
+  {k:['hidden','trap','pressure','pushy','scam','trust','safe','reliable','honest','transparency'],
+   a:"Zero pressure is one of our core commitments. No cold calls, no manufactured urgency, no commission-driven tactics. Your guide is compensated the same regardless of which property you choose — they're genuinely motivated to find the right fit for you."},
+  {k:['hello','hi','hey','hiya','good morning','good afternoon','good evening','howdy'],
+   a:"Hi! 👋 I'm Kind AI — I can answer questions about buying, selling, renting or investing in California real estate. What can I help you with today?"},
+  {k:['thanks','thank you','cheers','great','perfect','helpful','awesome','brilliant','excellent'],
+   a:"Happy to help! If you're ready to take the next step, hit the Step Inside button and we'll match you with a guide. No commitment needed. 😊"},
+  {k:['what is','what are','explain','tell me about','how does','how do','what do','difference'],
+   a:"Kind Real Estate is California's most transparent real estate platform — verified agents, flat 2.5% commission, zero hidden fees. We guide you through every step from first search to keys. What specifically would you like to know more about?"},
+];
+
+const chatQuickReplies = ['How does pricing work?','How do I get started?','Can I speak to an agent?','Is there a mobile app?'];
+let chatOpen = false;
+let chatVoiceActive = false;
+let chatRecognition = null;
+let chatInquiryStage = null;
+let chatInquiryData = {};
+
+function toggleChat() {
+  chatOpen = !chatOpen;
+  const win = document.getElementById('chatWindow');
+  const notif = document.getElementById('chatNotif');
+  win.classList.toggle('open', chatOpen);
+  if (notif) notif.style.display = 'none';
+  if (chatOpen && document.getElementById('chatMessages').children.length === 0) {
+    chatInitMessages();
+  }
+}
+
+function chatInitMessages() {
+  addChatBubble("👋 Hi! I'm your Kind AI Guide — I can answer questions about buying, selling, renting, or investing in California real estate.\n\nWhat would you like to know?", 'bot');
+  setTimeout(() => {
+    const qr = document.createElement('div');
+    qr.className = 'chat-quick-replies';
+    chatQuickReplies.forEach(q => {
+      const btn = document.createElement('button');
+      btn.className = 'chat-qr';
+      btn.textContent = q;
+      btn.onclick = () => { btn.parentElement.style.display='none'; sendChatAuto(q); };
+      qr.appendChild(btn);
+    });
+    document.getElementById('chatMessages').appendChild(qr);
+    scrollChatToBottom();
+  }, 600);
+}
+
+function addChatBubble(text, sender) {
+  const msgs = document.getElementById('chatMessages');
+  const b = document.createElement('div');
+  b.className = 'chat-bubble ' + sender;
+  b.textContent = text;
+  msgs.appendChild(b);
+  scrollChatToBottom();
+  return b;
+}
+
+function scrollChatToBottom() {
+  const msgs = document.getElementById('chatMessages');
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function showChatTyping() {
+  const msgs = document.getElementById('chatMessages');
+  const t = document.createElement('div');
+  t.className = 'chat-bubble bot chat-typing';
+  t.id = 'chatTyping';
+  t.innerHTML = '<span></span><span></span><span></span>';
+  msgs.appendChild(t);
+  scrollChatToBottom();
+}
+
+function removeChatTyping() {
+  const t = document.getElementById('chatTyping');
+  if (t) t.remove();
+}
+
+function sendChatAuto(text) {
+  addChatBubble(text, 'user');
+  processChatInput(text);
+}
+
+function sendChatMessage() {
+  const input = document.getElementById('chatInput');
+  const text = input.value.trim();
+  if (!text) return;
+  input.value = '';
+  addChatBubble(text, 'user');
+  processChatInput(text);
+}
+
+function processChatInput(text) {
+  if (chatInquiryStage === 'name') {
+    chatInquiryData.name = text;
+    chatInquiryStage = 'email';
+    showChatTyping();
+    setTimeout(() => { removeChatTyping(); addChatBubble('Nice to meet you, ' + text + '! What\'s your email so we can follow up?', 'bot'); scrollChatToBottom(); }, 800);
+    return;
+  }
+  if (chatInquiryStage === 'email') {
+    chatInquiryData.email = text;
+    chatInquiryStage = null;
+    showChatTyping();
+    setTimeout(() => { removeChatTyping(); addChatBubble('Perfect! We\'ve saved your enquiry. A member of our team (' + chatInquiryData.name + ', ' + text + ') will be in touch within 2 hours. 🏠', 'bot'); scrollChatToBottom(); }, 900);
+    return;
+  }
+  const lower = text.toLowerCase();
+  showChatTyping();
+  setTimeout(() => {
+    removeChatTyping();
+    if (/\b(book|schedule|appointment|callback|call me|contact me|enquir|inquir)\b/.test(lower)) {
+      addChatBubble("I'd love to connect you with our team! Let me take a quick enquiry. What's your name?", 'bot');
+      chatInquiryStage = 'name';
+      return;
+    }
+    let best = null;
+    let bestScore = 0;
+    for (const entry of chatKB) {
+      const score = entry.k.reduce((s, kw) => s + (lower.includes(kw) ? 1 : 0), 0);
+      if (score > bestScore) { bestScore = score; best = entry; }
+    }
+    if (best && bestScore > 0) {
+      addChatBubble(best.a, 'bot');
+    } else {
+      addChatBubble("Great question! I don't have that specific answer right now. Would you like me to take your details and have our team follow up? Just say 'yes' or type your question and I'll do my best.", 'bot');
+    }
+    if (bestScore > 0 && Math.random() > 0.5) {
+      setTimeout(() => {
+        const qr = document.createElement('div');
+        qr.className = 'chat-quick-replies';
+        ['Book a callback','See pricing','How do I start?'].forEach(q => {
+          const btn = document.createElement('button');
+          btn.className = 'chat-qr';
+          btn.textContent = q;
+          btn.onclick = () => { qr.style.display='none'; sendChatAuto(q); };
+          qr.appendChild(btn);
+        });
+        document.getElementById('chatMessages').appendChild(qr);
+        scrollChatToBottom();
+      }, 400);
+    }
+  }, 700 + Math.random() * 400);
+}
+
+function toggleVoice() {
+  if (!('SpeechRecognition' in window) && !('webkitSpeechRecognition' in window)) {
+    if (!chatOpen) toggleChat();
+    addChatBubble("Voice input isn't supported in this browser. Please try Chrome or Safari, or type your question below.", 'bot');
+    return;
+  }
+  const btn = document.getElementById('chatVoiceBtn');
+  if (chatVoiceActive) {
+    chatVoiceActive = false;
+    if (chatRecognition) chatRecognition.stop();
+    btn.classList.remove('recording');
+    btn.textContent = '🎤';
+    return;
+  }
+  chatVoiceActive = true;
+  btn.classList.add('recording');
+  btn.textContent = '⏹';
+  if (!chatOpen) toggleChat();
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  chatRecognition = new SR();
+  chatRecognition.lang = 'en-US';
+  chatRecognition.interimResults = false;
+  chatRecognition.maxAlternatives = 1;
+  chatRecognition.onresult = (e) => {
+    const transcript = e.results[0][0].transcript;
+    document.getElementById('chatInput').value = transcript;
+    chatVoiceActive = false;
+    btn.classList.remove('recording');
+    btn.textContent = '🎤';
+    sendChatMessage();
+  };
+  chatRecognition.onerror = () => {
+    chatVoiceActive = false;
+    btn.classList.remove('recording');
+    btn.textContent = '🎤';
+    addChatBubble("Couldn't hear that. Please check microphone permissions and try again, or type your question.", 'bot');
+  };
+  chatRecognition.onend = () => {
+    chatVoiceActive = false;
+    btn.classList.remove('recording');
+    btn.textContent = '🎤';
+  };
+  chatRecognition.start();
+  addChatBubble("🎤 Listening... speak your question now.", 'bot');
+  scrollChatToBottom();
+}
+
+// Show chat notification after 8s
+setTimeout(() => {
+  if (!chatOpen) {
+    const notif = document.getElementById('chatNotif');
+    if (notif) notif.style.display = 'flex';
+  }
+}, 8000);
+
 </script>
 
 <!-- ═══ STEP INSIDE MODAL ═══ -->
@@ -4497,19 +4941,24 @@ document.querySelectorAll('[id^="ptab-"]').forEach(btn => {
     </div>
     <!-- Form -->
     <div style="padding:0 36px 36px;">
-      <div style="display:flex;gap:12px;margin-bottom:14px;">
-        <input id="si-first" type="text" placeholder="First name" style="flex:1;padding:13px 16px;border-radius:12px;background:rgba(255,255,255,0.05);border:1px solid rgba(196,151,90,0.2);color:#f0ece4;font-size:14px;outline:none;">
-        <input id="si-last" type="text" placeholder="Last name" style="flex:1;padding:13px 16px;border-radius:12px;background:rgba(255,255,255,0.05);border:1px solid rgba(196,151,90,0.2);color:#f0ece4;font-size:14px;outline:none;">
+      <div id="siStep1">
+        <p style="font-size:16px;color:var(--gray);margin-bottom:28px;">Tell us what you're looking to do and we'll match you with the right guide.</p>
+        <div class="si-goals" id="siGoals">
+          <div class="si-goal-btn" onclick="selectSiGoal(this,'Buy')">🏠 Buy a Home</div>
+          <div class="si-goal-btn" onclick="selectSiGoal(this,'Sell')">📋 Sell My Home</div>
+          <div class="si-goal-btn" onclick="selectSiGoal(this,'Rent')">🔑 Rent a Space</div>
+          <div class="si-goal-btn" onclick="selectSiGoal(this,'Invest')">📈 Invest</div>
+        </div>
+        <button onclick="goToSiStep2()" class="si-submit-btn" id="siStep1Next" disabled style="margin-top:28px;opacity:0.4;cursor:not-allowed;">Continue →</button>
       </div>
-      <input id="si-email" type="email" placeholder="Email address" style="width:100%;padding:13px 16px;border-radius:12px;background:rgba(255,255,255,0.05);border:1px solid rgba(196,151,90,0.2);color:#f0ece4;font-size:14px;outline:none;box-sizing:border-box;margin-bottom:14px;">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:20px;">
-        <label id="si-buy" onclick="toggleSiGoal(this)" style="padding:12px;border-radius:12px;background:rgba(196,151,90,0.12);border:2px solid rgba(196,151,90,0.4);text-align:center;cursor:pointer;font-size:13px;font-weight:600;color:var(--gold);">Buy</label>
-        <label id="si-sell" onclick="toggleSiGoal(this)" style="padding:12px;border-radius:12px;background:rgba(255,255,255,0.04);border:2px solid rgba(255,255,255,0.08);text-align:center;cursor:pointer;font-size:13px;font-weight:600;color:rgba(240,236,228,0.5);">Sell</label>
-        <label id="si-rent" onclick="toggleSiGoal(this)" style="padding:12px;border-radius:12px;background:rgba(255,255,255,0.04);border:2px solid rgba(255,255,255,0.08);text-align:center;cursor:pointer;font-size:13px;font-weight:600;color:rgba(240,236,228,0.5);">Rent</label>
-        <label id="si-invest" onclick="toggleSiGoal(this)" style="padding:12px;border-radius:12px;background:rgba(255,255,255,0.04);border:2px solid rgba(255,255,255,0.08);text-align:center;cursor:pointer;font-size:13px;font-weight:600;color:rgba(240,236,228,0.5);">Invest</label>
+      <div id="siStep2" style="display:none;">
+        <button onclick="backToSiStep1()" style="background:none;border:none;color:var(--gray);cursor:pointer;font-size:13px;margin-bottom:16px;padding:0;">← Back</button>
+        <p style="font-size:15px;color:var(--gray);margin-bottom:20px;">Almost there — where should we send your personalised guide?</p>
+        <input id="siName" type="text" placeholder="Your name" style="width:100%;padding:13px 16px;background:rgba(255,255,255,0.04);border:1px solid rgba(196,151,90,0.2);border-radius:4px;color:var(--cream);font-size:14px;margin-bottom:12px;box-sizing:border-box;" required>
+        <input id="siEmail" type="email" placeholder="Your email" style="width:100%;padding:13px 16px;background:rgba(255,255,255,0.04);border:1px solid rgba(196,151,90,0.2);border-radius:4px;color:var(--cream);font-size:14px;margin-bottom:20px;box-sizing:border-box;" required>
+        <button onclick="submitStepInside()" class="si-submit-btn">✦ Get My Free Guide →</button>
+        <p style="font-size:11px;color:var(--gray);text-align:center;margin-top:12px;">No spam. No commitment. We'll send your personalised guide within 24 hours.</p>
       </div>
-      <button onclick="submitStepInside()" style="width:100%;padding:16px;border-radius:14px;background:linear-gradient(135deg,#c4975a,#a07840);border:none;color:#0c0b09;font-size:16px;font-weight:700;cursor:pointer;letter-spacing:0.02em;">✦ Request Early Access</button>
-      <p style="text-align:center;font-size:12px;color:rgba(240,236,228,0.3);margin:14px 0 0;">California-only platform · Free to join · Launching 2025</p>
     </div>
   </div>
 </div>
