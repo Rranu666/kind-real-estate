@@ -276,7 +276,6 @@ body::before {
 }
 
 /* ── CANVAS BACKGROUND ── */
-#starfield { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
 
 /* ── NAV ── */
 nav {
@@ -341,31 +340,89 @@ nav.scrolled { padding: 14px 48px; background: #0f0d0b; }
 .hero {
   position: relative; z-index: 1;
   min-height: 100vh;
-  display: flex; align-items: center; justify-content: center;
-  text-align: center;
-  padding: 100px 24px 60px;
+  display: flex; align-items: center;
   overflow: hidden;
 }
-.hero-grid {
-  position: absolute; inset: 0;
-  background-image:
-    linear-gradient(rgba(196,151,90,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(196,151,90,0.03) 1px, transparent 1px);
-  background-size: 80px 80px;
-  mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, black 30%, transparent 100%);
+.hero-photo-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background: url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1920&q=90&auto=format&fit=crop') center/cover no-repeat;
 }
-.hero-glow {
-  position: absolute; top: 30%; left: 50%;
-  transform: translate(-50%, -50%);
-  width: 900px; height: 600px;
-  background: radial-gradient(ellipse, rgba(196,151,90,0.08) 0%, transparent 65%);
-  pointer-events: none;
+.hero-overlay {
+  position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(105deg,
+    rgba(12,11,9,0.95) 0%, rgba(12,11,9,0.9) 40%,
+    rgba(12,11,9,0.65) 65%, rgba(12,11,9,0.35) 100%);
 }
-/* Secondary ambient glow */
-.hero-glow-2 {
-  position: absolute; bottom: 0; left: 0; right: 0; height: 300px;
-  background: linear-gradient(to top, var(--navy), transparent);
-  pointer-events: none;
+.hero-wrap {
+  position: relative; z-index: 2;
+  width: 100%; max-width: 1280px;
+  margin: 0 auto;
+  padding: 140px 64px 100px;
+  display: grid;
+  grid-template-columns: 55fr 45fr;
+  gap: 80px;
+  align-items: center;
+}
+.hero-text-col { text-align: left; }
+.hero-kicker { font-size: 13px; color: var(--gray); margin-bottom: 20px; letter-spacing: 0.02em; }
+.hero-text-col .badge { justify-content: flex-start; }
+.hero-text-col .hero-sub { margin-left: 0; margin-right: 0; }
+.hero-text-col .hero-actions { justify-content: flex-start; }
+.hero-visual-col { display: flex; flex-direction: column; gap: 20px; }
+.hero-photo-frame { position: relative; }
+.hero-photo-main {
+  width: 100%; height: 380px; object-fit: cover; display: block;
+  border-radius: 12px;
+  border: 1px solid rgba(196,151,90,0.15);
+  box-shadow: 0 32px 80px rgba(0,0,0,0.55);
+}
+.hero-trust-card {
+  position: absolute;
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 18px;
+  background: rgba(14,13,11,0.94);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(196,151,90,0.22);
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.45);
+  white-space: nowrap;
+}
+.htc-top { top: -18px; right: -12px; }
+.htc-bottom { bottom: -18px; left: -12px; }
+.htc-icon {
+  width: 34px; height: 34px; border-radius: 8px; flex-shrink: 0;
+  background: rgba(196,151,90,0.12);
+  border: 1px solid rgba(196,151,90,0.28);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px; color: var(--gold); font-weight: 700;
+}
+.htc-label { font-size: 13px; font-weight: 600; color: var(--cream); line-height: 1.2; }
+.htc-sub { font-size: 11px; color: var(--gray); margin-top: 2px; }
+.hero-social-proof {
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px 18px;
+  background: rgba(20,18,16,0.7);
+  border: 1px solid rgba(196,151,90,0.1);
+  border-radius: 8px;
+  backdrop-filter: blur(8px);
+  margin-top: 24px;
+}
+.hero-thumb-stack { display: flex; }
+.hero-thumb-stack img {
+  width: 36px; height: 36px; border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #141210;
+  margin-right: -10px;
+}
+.hero-proof-text { font-size: 13px; color: var(--cream-dim); line-height: 1.5; }
+.hero-proof-text strong { color: var(--gold); }
+@media(max-width:960px){
+  .hero-wrap { grid-template-columns: 1fr; padding: 120px 32px 60px; gap: 48px; }
+  .hero-text-col { text-align: center; }
+  .hero-text-col .badge { justify-content: center; }
+  .hero-text-col .hero-actions { justify-content: center; }
+  .hero-text-col .hero-sub { margin: 0 auto 32px; }
+  .hero-visual-col { display: none; }
 }
 .badge {
   display: inline-flex; align-items: center; gap: 10px;
@@ -395,7 +452,7 @@ nav.scrolled { padding: 14px 48px; background: #0f0d0b; }
   font-weight: 300;
 }
 .hero-sub strong { color: var(--cream); font-weight: 500; }
-.hero-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 72px; }
+.hero-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 0; }
 .btn-lg {
   padding: 16px 40px; border-radius: 3px; font-size: 13px; font-weight: 500;
   letter-spacing: 0.1em; text-transform: uppercase;
@@ -1963,252 +2020,9 @@ body { overflow-x: hidden !important; }
   .two-col-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
 }
 
-/* ═══════════════════════════════════════
-   HERO IMMERSIVE SCENE
-═══════════════════════════════════════ */
-.hero-scene {
-  position: absolute; inset: 0;
-  overflow: hidden; pointer-events: none; z-index: 0;
-}
-/* Sky — deep indigo space → purple dusk → golden amber horizon */
-.hero-sky {
-  position: absolute; inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(2,3,8,.96)       0%,
-    rgba(8,8,28,.9)       12%,
-    rgba(20,10,46,.84)    25%,
-    rgba(58,12,48,.78)    38%,
-    rgba(105,28,24,.73)   50%,
-    rgba(165,68,14,.7)    58%,
-    rgba(218,110,18,.64)  64%,
-    rgba(245,145,22,.6)   67%,
-    rgba(195,86,14,.67)   71%,
-    rgba(82,30,7,.83)     81%,
-    rgba(14,9,4,.95)      91%,
-    #0c0b09               100%
-  );
-}
-/* Warm horizon glow — bright and wide */
-.hero-horizon-glow {
-  position: absolute; left: 0; right: 0; bottom: 31%;
-  height: 260px;
-  background: radial-gradient(ellipse 78% 100% at 50% 100%, rgba(245,165,40,.65) 0%, rgba(200,100,18,.32) 40%, transparent 68%);
-  animation: hGlow 7s ease-in-out infinite;
-}
-@keyframes hGlow {
-  0%,100%{opacity:.78;transform:scaleY(1)} 50%{opacity:1;transform:scaleY(1.12)}
-}
-/* Crepuscular light rays */
-.hero-rays-svg {
-  position: absolute; bottom: 31%; left: -35%; width: 170%; height: 64%;
-  animation: raysAnim 10s ease-in-out infinite;
-}
-@keyframes raysAnim { 0%,100%{opacity:.14} 50%{opacity:.28} }
-/* Ocean shimmer band */
-.hero-ocean {
-  position: absolute; bottom: 30%; left: -5%; right: -5%;
-  height: 3%; overflow: hidden;
-}
-.hero-ocean-a {
-  position: absolute; inset: 0;
-  background: linear-gradient(90deg, transparent 0%, rgba(196,151,90,.2) 14%, rgba(245,185,55,.7) 34%, rgba(255,200,65,.9) 50%, rgba(245,185,55,.7) 66%, rgba(196,151,90,.2) 86%, transparent 100%);
-  animation: waveA 5s ease-in-out infinite;
-}
-.hero-ocean-b {
-  position: absolute; inset: 0;
-  background: linear-gradient(90deg, transparent 5%, rgba(196,151,90,.12) 28%, rgba(230,165,50,.42) 55%, rgba(196,151,90,.12) 82%, transparent 95%);
-  animation: waveA 7.5s ease-in-out infinite reverse; opacity: .65;
-}
-@keyframes waveA {
-  0%,100%{transform:translateX(-6%) scaleX(1.12);opacity:.65}
-  50%    {transform:translateX(6%)  scaleX(.9);  opacity:1}
-}
-/* Distant treeline */
-.hero-tl-svg {
-  position: absolute; bottom: 29.5%; left: -5%; width: 110%; display: block; opacity: .6;
-}
-/* Ground fade */
-.hero-ground {
-  position: absolute; bottom: 0; left: 0; right: 0; height: 38%;
-  background: linear-gradient(180deg, transparent 0%, rgba(12,11,9,.12) 14%, rgba(12,11,9,.38) 36%, rgba(12,11,9,.72) 62%, #0c0b09 100%);
-}
-/* ── Sun disc — glowing at horizon ── */
-.hero-sun {
-  position: absolute;
-  bottom: 30.4%; left: 0; right: 0;
-  width: 92px; height: 92px; margin: 0 auto;
-  border-radius: 50%;
-  background: radial-gradient(circle, #fffdf0 0%, #fff4c0 18%, #ffdf78 38%, #ffaa28 62%, rgba(255,140,18,0) 100%);
-  box-shadow:
-    0 0 0 6px rgba(255,230,100,.45),
-    0 0 24px 12px rgba(255,220,90,.85),
-    0 0 55px 28px rgba(255,178,42,.7),
-    0 0 110px 55px rgba(218,128,18,.52),
-    0 0 200px 100px rgba(175,78,8,.32),
-    0 0 380px 190px rgba(140,52,4,.18);
-  animation: sunP 9s ease-in-out infinite;
-  z-index: 2;
-}
-@keyframes sunP {
-  0%,100%{
-    transform:scale(1);
-    box-shadow:0 0 0 6px rgba(255,230,100,.45),0 0 24px 12px rgba(255,220,90,.85),0 0 55px 28px rgba(255,178,42,.7),0 0 110px 55px rgba(218,128,18,.52),0 0 200px 100px rgba(175,78,8,.32),0 0 380px 190px rgba(140,52,4,.18);
-  }
-  50%{
-    transform:scale(1.07);
-    box-shadow:0 0 0 8px rgba(255,235,110,.58),0 0 32px 16px rgba(255,225,100,.95),0 0 72px 36px rgba(255,185,55,.82),0 0 145px 72px rgba(218,128,18,.65),0 0 260px 130px rgba(175,78,8,.42),0 0 480px 240px rgba(140,52,4,.24);
-  }
-}
-/* ── Crescent moon ── */
-.hero-moon {
-  position: absolute;
-  top: 9%; right: 13%;
-  width: 46px; height: 46px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 58% 42%, #fff2d8 0%, #f8d888 42%, rgba(220,180,80,0) 70%);
-  box-shadow: 0 0 22px 10px rgba(245,205,100,.2), 0 0 50px 25px rgba(200,155,60,.1);
-  animation: moonG 14s ease-in-out infinite;
-}
-.hero-moon::after {
-  content:''; position:absolute; top:0; left:0;
-  width:44px; height:44px; border-radius:50%;
-  background: radial-gradient(circle at 33% 30%, rgba(10,12,25,.96) 0%, rgba(10,12,25,.7) 38%, transparent 58%);
-}
-@keyframes moonG { 0%,100%{opacity:.7} 50%{opacity:1} }
-/* ── Cloud silhouettes (soft sunset-tinted) ── */
-.hero-cloud { position: absolute; border-radius: 50%; pointer-events: none; }
-.hero-cloud-1 {
-  top: 20%; left: 6%; width: 200px; height: 44px;
-  background: rgba(210,105,42,.14); filter: blur(15px);
-  animation: cDrift1 28s ease-in-out infinite;
-}
-.hero-cloud-2 {
-  top: 16%; right: 8%; width: 260px; height: 52px;
-  background: rgba(195,88,35,.11); filter: blur(20px);
-  animation: cDrift2 35s ease-in-out infinite;
-}
-.hero-cloud-3 {
-  top: 28%; left: 28%; width: 360px; height: 48px;
-  background: rgba(175,75,25,.08); filter: blur(22px);
-  animation: cDrift1 45s ease-in-out infinite reverse;
-}
-@keyframes cDrift1 { 0%,100%{transform:translateX(0)} 50%{transform:translateX(3%)} }
-@keyframes cDrift2 { 0%,100%{transform:translateX(0)} 50%{transform:translateX(-2%)} }
-/* Home silhouette — wider and grander */
-.hero-home-wrap {
-  position: absolute; bottom: 19%; left: 0; right: 0;
-  width: min(1060px, 96vw); margin: 0 auto;
-}
-/* ── Reflecting pool surface ── */
-.hero-pool-surface {
-  position: absolute;
-  bottom: 15%; left: 0; right: 0;
-  width: min(580px, 62vw); height: 60px;
-  margin: 0 auto;
-  background: linear-gradient(180deg, rgba(245,165,50,.48) 0%, rgba(190,110,20,.28) 52%, rgba(45,24,5,.12) 100%);
-  border-top: 1px solid rgba(248,185,65,.55);
-  border-radius: 0 0 8px 8px;
-  overflow: hidden;
-  animation: poolS 5.5s ease-in-out infinite;
-}
-.hero-pool-surface::before {
-  content:''; position:absolute; inset:0;
-  background: repeating-linear-gradient(90deg,
-    transparent 0, transparent 22px,
-    rgba(255,205,80,.1) 22px, rgba(255,205,80,.1) 24px
-  );
-  animation: poolScan 7s linear infinite;
-}
-.hero-pool-surface::after {
-  content:''; position:absolute; left:0; right:0; top:0; height:2px;
-  background: linear-gradient(90deg,
-    transparent 5%,
-    rgba(255,205,80,.6) 28%,
-    rgba(255,230,110,1) 50%,
-    rgba(255,205,80,.6) 72%,
-    transparent 95%
-  );
-}
-@keyframes poolS    { 0%,100%{opacity:.65;transform:scaleX(1)} 50%{opacity:1;transform:scaleX(1.012)} }
-@keyframes poolScan { from{transform:translateX(0)} to{transform:translateX(-24px)} }
-/* Pool ambient glow */
-.hero-pool-glow {
-  position: absolute; bottom: 13%; left: 0; right: 0;
-  width: min(640px, 72vw); height: 22px; margin: 0 auto;
-  background: radial-gradient(ellipse at 50% 50%, rgba(220,155,50,.38) 0%, transparent 70%);
-  filter: blur(9px);
-  animation: poolG 4.5s ease-in-out infinite;
-}
-@keyframes poolG { 0%,100%{opacity:.5;width:min(640px,72vw)} 50%{opacity:.95;width:min(720px,80vw)} }
-/* Palm tree positioning — 6 trees total */
-.h-palm { position: absolute; }
-.h-palm.pl1 { left: 0%;   bottom: 15%; }
-.h-palm.pl2 { left: 9%;   bottom: 16%; }
-.h-palm.pl3 { left: 19%;  bottom: 15.5%; }
-.h-palm.pr1 { right: 0%;  bottom: 15%; }
-.h-palm.pr2 { right: 9%;  bottom: 16%; }
-.h-palm.pr3 { right: 19%; bottom: 15.5%; }
-.palm-flip  { transform: scaleX(-1); }
-/* Sway animations */
-.ps1,.ps2,.ps3,.ps4,.ps5,.ps6 { transform-origin: 50% 100%; display: block; }
-.ps1 { animation: pa1 7.2s ease-in-out infinite; }
-.ps2 { animation: pa2 9.1s ease-in-out infinite; }
-.ps3 { animation: pa3 6.8s ease-in-out infinite; }
-.ps4 { animation: pa4 8.6s ease-in-out infinite; }
-.ps5 { animation: pa1 8.4s ease-in-out infinite 1.8s; }
-.ps6 { animation: pa3 7.6s ease-in-out infinite 2.4s; }
-@keyframes pa1 { 0%,100%{transform:rotate(0deg)}   28%{transform:rotate(2.2deg)}  72%{transform:rotate(-1.6deg)} }
-@keyframes pa2 { 0%,100%{transform:rotate(.8deg)}  42%{transform:rotate(-2.4deg)} 78%{transform:rotate(1.8deg)} }
-@keyframes pa3 { 0%,100%{transform:rotate(-.6deg)} 36%{transform:rotate(2.6deg)}  74%{transform:rotate(-2deg)} }
-@keyframes pa4 { 0%,100%{transform:rotate(.4deg)}  50%{transform:rotate(-1.8deg)} 82%{transform:rotate(2.2deg)} }
-/* Floating 3D badge above home */
-.hero-3d-badge {
-  position: absolute; bottom: 42%; left: 0; right: 0;
-  width: fit-content; margin: 0 auto;
-  padding: 5px 14px;
-  background: rgba(196,151,90,.12); border: 1px solid rgba(196,151,90,.34);
-  border-radius: 2px;
-  font-family: 'DM Sans', sans-serif; font-size: 9px; font-weight: 500;
-  letter-spacing: .16em; text-transform: uppercase; color: rgba(196,151,90,.82);
-  white-space: nowrap;
-  animation: badge3d 5.5s ease-in-out infinite;
-}
-@keyframes badge3d {
-  0%,100%{transform:translateY(0);   opacity:.72}
-  50%    {transform:translateY(-10px);opacity:1}
-}
-/* Atmospheric fog */
-.hero-fog {
-  position: absolute; bottom: 17%; left: 0; right: 0; height: 140px;
-  background: radial-gradient(ellipse 92% 100% at 50% 100%, rgba(196,151,90,.09) 0%, transparent 65%);
-  animation: fogD 12s ease-in-out infinite;
-}
-@keyframes fogD {
-  0%,100%{opacity:.55;transform:translateX(0)} 50%{opacity:1;transform:translateX(.8%)}
-}
-/* Firefly canvas */
-#heroFireflies { position: absolute; inset: 0; z-index: 1; }
-/* Mobile */
-@media(max-width:768px){
-  .hero-sun { width:52px; height:52px; }
-  .hero-cloud-1,.hero-cloud-2,.hero-cloud-3 { display:none }
-  .h-palm.pl3,.h-palm.pr3 { display:none }
-}
-@media(max-width:640px){
-  .h-palm.pl1,.h-palm.pr1 { display:none }
-  .h-palm.pl2 { left:3% }
-  .h-palm.pr2 { right:3% }
-  .hero-3d-badge { display:none }
-  .hero-home-wrap { bottom:13%; width:100% }
-  .hero-pool-surface { width:min(300px,88vw) }
-}
-@media(max-width:480px){ .h-palm { display:none } }
 </style>
 </head>
 <body>
-
-<canvas id="starfield"></canvas>
 
 <!-- NAV -->
 <nav id="navbar">
@@ -2290,341 +2104,77 @@ body { overflow-x: hidden !important; }
 
 <!-- HERO -->
 <section class="hero">
+  <div class="hero-photo-bg"></div>
+  <div class="hero-overlay"></div>
 
-  <!-- ══ IMMERSIVE SCENE ══ -->
-  <div class="hero-scene" id="heroScene">
-
-    <!-- Sky gradient -->
-    <div class="hero-sky" data-depth="0.02"></div>
-
-    <!-- Crescent moon -->
-    <div class="hero-moon" data-depth="0.015"></div>
-
-    <!-- Cloud silhouettes tinted by sunset -->
-    <div class="hero-cloud hero-cloud-1" data-depth="0.025"></div>
-    <div class="hero-cloud hero-cloud-2" data-depth="0.02"></div>
-    <div class="hero-cloud hero-cloud-3" data-depth="0.018"></div>
-
-    <!-- Warm horizon glow -->
-    <div class="hero-horizon-glow" data-depth="0.04"></div>
-
-    <!-- Crepuscular light rays -->
-    <svg class="hero-rays-svg" viewBox="0 0 1400 580" preserveAspectRatio="xMidYMax slice">
-      <defs>
-        <linearGradient id="rg" x1="0" y1="1" x2="0" y2="0">
-          <stop offset="0%" stop-color="rgba(245,175,55,1)"/>
-          <stop offset="100%" stop-color="rgba(200,130,30,0)"/>
-        </linearGradient>
-      </defs>
-      <polygon points="700,580 550,0 585,0"   fill="url(#rg)" opacity=".9"/>
-      <polygon points="700,580 455,0 492,0"   fill="url(#rg)" opacity=".55"/>
-      <polygon points="700,580 625,0 648,0"   fill="url(#rg)" opacity=".85"/>
-      <polygon points="700,580 718,0 740,0"   fill="url(#rg)" opacity=".78"/>
-      <polygon points="700,580 785,0 820,0"   fill="url(#rg)" opacity=".62"/>
-      <polygon points="700,580 865,0 908,0"   fill="url(#rg)" opacity=".46"/>
-      <polygon points="700,580 382,0 414,0"   fill="url(#rg)" opacity=".4"/>
-      <polygon points="700,580 945,0 1002,0"  fill="url(#rg)" opacity=".32"/>
-      <polygon points="700,580 315,0 345,0"   fill="url(#rg)" opacity=".22"/>
-    </svg>
-
-    <!-- Sun disc at horizon -->
-    <div class="hero-sun"></div>
-
-    <!-- Ocean shimmer -->
-    <div class="hero-ocean" data-depth="0.06">
-      <div class="hero-ocean-a"></div>
-      <div class="hero-ocean-b"></div>
-    </div>
-
-    <!-- Distant treeline -->
-    <svg class="hero-tl-svg" viewBox="0 0 1400 90" preserveAspectRatio="xMidYMax meet" data-depth="0.07">
-      <path d="M0,90 C75,70 138,54 198,66 C226,50 254,38 278,52 C306,34 338,28 365,42 C393,24 424,26 454,38 C480,18 514,12 543,28 C570,8 603,6 630,22 C658,4 692,1 720,16 C746,0 780,-3 810,12 C838,-6 870,-2 900,11 C927,-8 960,-4 992,8 C1020,-8 1053,-3 1082,8 C1110,-8 1143,-1 1172,11 C1200,-4 1245,2 1295,14 C1340,6 1372,14 1400,22 L1400,90 Z" fill="#071104"/>
-    </svg>
-
-    <!-- Ground fade -->
-    <div class="hero-ground"></div>
-
-    <!-- ── Grand California estate silhouette ── -->
-    <div class="hero-home-wrap">
-      <svg viewBox="0 0 1200 320" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;overflow:visible">
-        <defs>
-          <radialGradient id="wg" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stop-color="rgba(255,230,140,.72)"/>
-            <stop offset="70%" stop-color="rgba(255,195,90,.28)"/>
-            <stop offset="100%" stop-color="rgba(196,151,90,0)"/>
-          </radialGradient>
-          <radialGradient id="wgB" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stop-color="rgba(255,240,165,.88)"/>
-            <stop offset="60%" stop-color="rgba(255,210,110,.42)"/>
-            <stop offset="100%" stop-color="rgba(196,151,90,0)"/>
-          </radialGradient>
-          <filter id="wf" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur in="SourceGraphic" stdDeviation="6"/>
-          </filter>
-          <filter id="wfS" x="-70%" y="-70%" width="240%" height="240%">
-            <feGaussianBlur in="SourceGraphic" stdDeviation="14"/>
-          </filter>
-          <linearGradient id="pR" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="rgba(255,210,80,.78)"/>
-            <stop offset="40%" stop-color="rgba(220,150,38,.5)"/>
-            <stop offset="100%" stop-color="rgba(60,32,6,.18)"/>
-          </linearGradient>
-        </defs>
-
-        <!-- Property boundary walls -->
-        <rect x="0"    y="268" width="378"  height="52" fill="#0c0a08"/>
-        <rect x="0"    y="260" width="380"  height="12" fill="#130f0c"/>
-        <rect x="822"  y="268" width="378"  height="52" fill="#0c0a08"/>
-        <rect x="820"  y="260" width="382"  height="12" fill="#130f0c"/>
-        <!-- Gate pillars -->
-        <rect x="375"  y="248" width="16"   height="28" fill="#180f0c"/>
-        <rect x="809"  y="248" width="16"   height="28" fill="#180f0c"/>
-
-        <!-- Far left low wing -->
-        <rect x="0"    y="212" width="160"  height="108" fill="#0d0b09"/>
-        <rect x="0"    y="202" width="162"  height="14"  fill="#130f0c"/>
-        <rect x="14"   y="225" width="54"   height="75"  rx="1" fill="rgba(196,151,90,.3)"/>
-        <rect x="82"   y="225" width="54"   height="75"  rx="1" fill="rgba(196,151,90,.25)"/>
-
-        <!-- Left main wing -->
-        <rect x="150"  y="158" width="258"  height="162" fill="#0f0c0a"/>
-        <rect x="148"  y="146" width="262"  height="16"  fill="#170e0b"/>
-        <rect x="168"  y="174" width="78"   height="106" rx="1" fill="rgba(255,205,110,.72)"/>
-        <rect x="168"  y="174" width="78"   height="106" rx="1" fill="url(#wg)"/>
-        <rect x="260"  y="174" width="78"   height="106" rx="1" fill="rgba(255,205,110,.65)"/>
-        <rect x="260"  y="174" width="78"   height="106" rx="1" fill="url(#wg)"/>
-        <rect x="162"  y="168" width="90"   height="118" rx="2" fill="rgba(255,195,90,.38)" filter="url(#wf)"/>
-        <rect x="174"  y="150" width="48"   height="12"  rx="1" fill="rgba(196,151,90,.2)"/>
-        <rect x="266"  y="150" width="48"   height="12"  rx="1" fill="rgba(196,151,90,.16)"/>
-
-        <!-- Center grand body -->
-        <rect x="400"  y="48"  width="400"  height="272" fill="#100d0b"/>
-        <rect x="398"  y="36"  width="404"  height="16"  fill="#160f0c"/>
-        <line x1="398" y1="36" x2="802" y2="36" stroke="rgba(196,151,90,.09)" stroke-width="1.5"/>
-
-        <!-- Entry tower projecting above roofline -->
-        <rect x="562"  y="16"  width="76"   height="36"  fill="#120f0d"/>
-        <rect x="560"  y="10"  width="80"   height="10"  fill="#1a0e0b"/>
-        <rect x="570"  y="20"  width="22"   height="16"  rx="1" fill="rgba(196,151,90,.24)"/>
-        <rect x="608"  y="20"  width="22"   height="16"  rx="1" fill="rgba(196,151,90,.22)"/>
-
-        <!-- Left large windows -->
-        <rect x="410"  y="64"  width="90"   height="122" rx="1" fill="rgba(255,210,120,.82)"/>
-        <rect x="410"  y="64"  width="90"   height="122" rx="1" fill="url(#wgB)"/>
-        <rect x="514"  y="64"  width="44"   height="122" rx="1" fill="rgba(220,175,90,.55)"/>
-
-        <!-- Grand entrance portal -->
-        <rect x="560"  y="38"  width="80"   height="8"   fill="rgba(255,200,100,.42)"/>
-        <rect x="564"  y="58"  width="18"   height="132" rx="1" fill="rgba(240,185,90,.48)"/>
-        <rect x="618"  y="58"  width="18"   height="132" rx="1" fill="rgba(240,185,90,.48)"/>
-        <rect x="585"  y="194" width="30"   height="126" rx="1" fill="#090806"/>
-        <rect x="583"  y="190" width="34"   height="7"        fill="rgba(255,205,100,.38)"/>
-
-        <!-- Right large windows -->
-        <rect x="642"  y="64"  width="44"   height="122" rx="1" fill="rgba(220,175,90,.55)"/>
-        <rect x="700"  y="64"  width="90"   height="122" rx="1" fill="rgba(255,210,120,.8)"/>
-        <rect x="700"  y="64"  width="90"   height="122" rx="1" fill="url(#wgB)"/>
-
-        <!-- Window blooms -->
-        <rect x="400"  y="56"  width="110"  height="140" rx="4" fill="rgba(255,200,100,.52)" filter="url(#wfS)"/>
-        <rect x="692"  y="56"  width="110"  height="140" rx="4" fill="rgba(255,200,100,.50)"  filter="url(#wfS)"/>
-
-        <!-- Upper windows -->
-        <rect x="416"  y="40"  width="54"   height="12"  rx="1" fill="rgba(196,151,90,.26)"/>
-        <rect x="484"  y="40"  width="36"   height="12"  rx="1" fill="rgba(196,151,90,.17)"/>
-        <rect x="680"  y="40"  width="36"   height="12"  rx="1" fill="rgba(196,151,90,.17)"/>
-        <rect x="730"  y="40"  width="54"   height="12"  rx="1" fill="rgba(196,151,90,.26)"/>
-
-        <!-- Right main wing -->
-        <rect x="792"  y="158" width="258"  height="162" fill="#0f0c0a"/>
-        <rect x="790"  y="146" width="262"  height="16"  fill="#170e0b"/>
-        <rect x="862"  y="174" width="78"   height="106" rx="1" fill="rgba(255,205,110,.68)"/>
-        <rect x="862"  y="174" width="78"   height="106" rx="1" fill="url(#wg)"/>
-        <rect x="954"  y="174" width="78"   height="106" rx="1" fill="rgba(255,205,110,.74)"/>
-        <rect x="954"  y="174" width="78"   height="106" rx="1" fill="url(#wg)"/>
-        <rect x="950"  y="170" width="86"   height="114" rx="2" fill="rgba(255,195,90,.38)" filter="url(#wf)"/>
-        <rect x="868"  y="150" width="48"   height="12"  rx="1" fill="rgba(196,151,90,.17)"/>
-        <rect x="958"  y="150" width="48"   height="12"  rx="1" fill="rgba(196,151,90,.22)"/>
-
-        <!-- Far right low wing -->
-        <rect x="1040" y="212" width="160"  height="108" fill="#0d0b09"/>
-        <rect x="1038" y="202" width="164"  height="14"  fill="#130f0c"/>
-        <rect x="1054" y="225" width="54"   height="75"  rx="1" fill="rgba(196,151,90,.27)"/>
-        <rect x="1122" y="225" width="54"   height="75"  rx="1" fill="rgba(196,151,90,.32)"/>
-
-        <!-- Hedges / landscape -->
-        <path d="M0,320 C26,278 70,260 115,266 C142,254 170,248 192,257 C215,243 240,246 258,260 L258,320 Z" fill="#081104" opacity=".94"/>
-        <path d="M942,320 L942,260 C960,246 985,243 1008,257 C1030,248 1058,254 1085,266 C1130,260 1174,278 1200,320 Z" fill="#081104" opacity=".94"/>
-        <!-- Driveway approach -->
-        <path d="M490,320 L512,284 L600,270 L800,270 L688,284 L710,320 Z" fill="#0d0b09" opacity=".65"/>
-
-        <!-- Reflecting pool -->
-        <rect x="418"  y="284" width="364"  height="36"  rx="6" fill="url(#pR)" stroke="rgba(255,205,80,.45)" stroke-width="1"/>
-        <rect x="418"  y="284" width="364"  height="3"   rx="2" fill="rgba(255,215,85,.72)"/>
-        <line x1="435" y1="295" x2="765"   y2="295"     stroke="rgba(255,215,90,.55)" stroke-width=".9" stroke-dasharray="18,12"/>
-        <line x1="442" y1="305" x2="760"   y2="305"     stroke="rgba(255,215,90,.38)"  stroke-width=".6" stroke-dasharray="14,16"/>
-        <line x1="450" y1="312" x2="752"   y2="312"     stroke="rgba(255,215,90,.22)"  stroke-width=".5" stroke-dasharray="10,20"/>
-        <ellipse cx="600" cy="298" rx="80" ry="8"        fill="rgba(255,230,110,.45)"/>
-        <ellipse cx="600" cy="295" rx="36" ry="4"        fill="rgba(255,245,155,.78)"/>
-        <ellipse cx="600" cy="293" rx="16" ry="2.5"      fill="rgba(255,255,210,.9)"/>
-
-        <line x1="0"   y1="320" x2="1200"  y2="320"     stroke="rgba(196,151,90,.04)" stroke-width="1"/>
-      </svg>
-    </div>
-
-    <!-- Reflecting pool CSS surface -->
-    <div class="hero-pool-surface"></div>
-
-    <!-- Pool ambient light -->
-    <div class="hero-pool-glow"></div>
-
-    <!-- Floating 3D badge -->
-    <div class="hero-3d-badge">✦ 3D Tour Available</div>
-
-    <!-- ── Palm trees — 6 total ── -->
-    <!-- Far left — tall -->
-    <div class="h-palm pl1" data-depth="0.17">
-      <div class="ps1">
-        <svg width="120" height="355" viewBox="0 0 120 355" style="overflow:visible">
-          <path d="M60,355 C59,305 57,254 54,203 C51,157 48,116 45,82 C43,55 41,36 39,16" stroke="#221409" stroke-width="12" fill="none" stroke-linecap="round"/>
-          <path d="M39,16 C45,-2 74,-18 114,-25 C91,-4 56,10 39,16"   fill="#1b2413"/>
-          <path d="M39,16 C52,8 87,3 122,7 C97,16 62,20 39,16"        fill="#1d2615"/>
-          <path d="M39,16 C50,27 77,37 110,44 C84,35 54,28 39,16"     fill="#1b2413"/>
-          <path d="M39,16 C48,32 44,55 38,76 C36,50 40,30 39,16"      fill="#182211"/>
-          <path d="M39,16 C28,28 6,38 -26,44 C-1,29 28,22 39,16"      fill="#1b2413"/>
-          <path d="M39,16 C32,5 12,-6 -18,-4 C4,8 28,14 39,16"        fill="#182211"/>
-          <path d="M39,16 C35,1 26,-20 17,-44 C22,-18 33,1 39,16"     fill="#1d2615"/>
-          <path d="M39,16 C44,-5 60,-24 90,-32 C70,-14 48,4 39,16"    fill="#1b2413"/>
-          <circle cx="39" cy="16" r="6" fill="#1e1608"/>
-        </svg>
+  <div class="hero-wrap">
+    <!-- Text column -->
+    <div class="hero-text-col">
+      <div class="badge">
+        <span class="badge-dot"></span>
+        Verified Agents · Transparent Pricing · Zero Pressure · Real Support
       </div>
-    </div>
-    <!-- Near left -->
-    <div class="h-palm pl2" data-depth="0.14">
-      <div class="ps2">
-        <svg width="92" height="278" viewBox="0 0 92 278" style="overflow:visible">
-          <path d="M46,278 C45,236 43,194 41,153 C39,116 37,84 35,58 C33,38 31,24 29,9" stroke="#1d1108" stroke-width="10" fill="none" stroke-linecap="round"/>
-          <path d="M29,9 C34,-7 58,-20 90,-25 C70,-5 42,4 29,9"    fill="#192212"/>
-          <path d="M29,9 C40,0 67,-3 96,2 C73,9 46,13 29,9"        fill="#1b2412"/>
-          <path d="M29,9 C37,18 60,27 88,31 C65,22 40,16 29,9"     fill="#192212"/>
-          <path d="M29,9 C23,22 12,37 -5,50 C6,30 21,17 29,9"      fill="#172010"/>
-          <path d="M29,9 C20,15 1,22 -28,26 C-5,14 18,10 29,9"     fill="#192212"/>
-          <path d="M29,9 C24,-3 15,-22 7,-42 C12,-18 23,-3 29,9"   fill="#1b2412"/>
-          <circle cx="29" cy="9" r="5" fill="#1a1407"/>
-        </svg>
+      <div class="hero-kicker">
+        Kind Real Estate · California's most <span style="color:var(--gold);font-weight:600;">transparent real estate platform</span>
       </div>
-    </div>
-    <!-- Inner left (smaller/closer to home) -->
-    <div class="h-palm pl3" data-depth="0.11">
-      <div class="ps5">
-        <svg width="72" height="215" viewBox="0 0 72 215" style="overflow:visible">
-          <path d="M36,215 C35,183 34,150 32,118 C30,90 29,65 27,44 C26,28 25,18 24,6" stroke="#1a0f07" stroke-width="8" fill="none" stroke-linecap="round"/>
-          <path d="M24,6 C28,-5 46,-14 70,-18 C55,-4 32,3 24,6"  fill="#162010"/>
-          <path d="M24,6 C31,-1 52,-4 76,-1 C58,6 36,9 24,6"     fill="#182210"/>
-          <path d="M24,6 C29,13 46,19 68,22 C51,16 32,12 24,6"   fill="#162010"/>
-          <path d="M24,6 C18,16 10,28 -2,38 C5,24 17,13 24,6"    fill="#141e0e"/>
-          <path d="M24,6 C18,11 4,16 -18,18 C-2,10 16,7 24,6"    fill="#162010"/>
-          <path d="M24,6 C20,-2 13,-16 6,-30 C10,-13 19,-2 24,6" fill="#182210"/>
-          <circle cx="24" cy="6" r="4" fill="#161205"/>
-        </svg>
+      <h1>
+        Real Estate<br>
+        <span class="line2">Without the <span class="gradient">Pressure</span>.</span>
+      </h1>
+      <p class="hero-sub">
+        <strong style="color:var(--gray-light);">Guided. Transparent. Human.</strong> — We walk with you through every step of buying, selling, or renting. No hidden fees. No pressure tactics. A dedicated guide who listens, not pushes.
+      </p>
+      <div class="search-bar fade-up">
+        <div class="search-mode">
+          <button class="mode-btn active" onclick="setMode(this,'Buy')">Buy</button>
+          <button class="mode-btn" onclick="setMode(this,'Rent')">Rent</button>
+          <button class="mode-btn" onclick="setMode(this,'Invest')">Invest</button>
+          <button class="mode-btn" onclick="setMode(this,'Stay')">Stay</button>
+        </div>
+        <input class="search-input" placeholder="Tell us what you need — city, budget, lifestyle..." id="searchInput">
+        <button class="search-submit" onclick="handleSearch()">✦ Find My Home</button>
+      </div>
+      <div class="hero-actions">
+        <a href="#how" class="btn-lg primary">Start My Journey →</a>
+        <a href="#" class="btn-lg secondary" onclick="openDemoModal();return false;">▶ See How It Works</a>
       </div>
     </div>
 
-    <!-- Far right — tall (mirrored) -->
-    <div class="h-palm pr1" data-depth="0.17">
-      <div class="palm-flip">
-        <div class="ps4">
-          <svg width="120" height="355" viewBox="0 0 120 355" style="overflow:visible">
-            <path d="M60,355 C59,305 57,254 54,203 C51,157 48,116 45,82 C43,55 41,36 39,16" stroke="#221409" stroke-width="12" fill="none" stroke-linecap="round"/>
-            <path d="M39,16 C45,-2 74,-18 114,-25 C91,-4 56,10 39,16"   fill="#1b2413"/>
-            <path d="M39,16 C52,8 87,3 122,7 C97,16 62,20 39,16"        fill="#1d2615"/>
-            <path d="M39,16 C50,27 77,37 110,44 C84,35 54,28 39,16"     fill="#1b2413"/>
-            <path d="M39,16 C48,32 44,55 38,76 C36,50 40,30 39,16"      fill="#182211"/>
-            <path d="M39,16 C28,28 6,38 -26,44 C-1,29 28,22 39,16"      fill="#1b2413"/>
-            <path d="M39,16 C32,5 12,-6 -18,-4 C4,8 28,14 39,16"        fill="#182211"/>
-            <path d="M39,16 C35,1 26,-20 17,-44 C22,-18 33,1 39,16"     fill="#1d2615"/>
-            <path d="M39,16 C44,-5 60,-24 90,-32 C70,-14 48,4 39,16"    fill="#1b2413"/>
-            <circle cx="39" cy="16" r="6" fill="#1e1608"/>
-          </svg>
+    <!-- Visual column -->
+    <div class="hero-visual-col">
+      <div class="hero-photo-frame">
+        <img class="hero-photo-main"
+          src="https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?w=900&q=90&auto=format&fit=crop"
+          alt="Beautiful California home interior — warm, bright living space">
+        <!-- Trust card: top right -->
+        <div class="hero-trust-card htc-top">
+          <div class="htc-icon">✓</div>
+          <div>
+            <div class="htc-label">Agent Verified</div>
+            <div class="htc-sub">Licence + ethics score checked</div>
+          </div>
+        </div>
+        <!-- Trust card: bottom left -->
+        <div class="hero-trust-card htc-bottom">
+          <div class="htc-icon">$</div>
+          <div>
+            <div class="htc-label">2.5% Flat Fee</div>
+            <div class="htc-sub">No surprises. Ever.</div>
+          </div>
         </div>
       </div>
-    </div>
-    <!-- Near right (mirrored) -->
-    <div class="h-palm pr2" data-depth="0.14">
-      <div class="palm-flip">
-        <div class="ps3">
-          <svg width="92" height="278" viewBox="0 0 92 278" style="overflow:visible">
-            <path d="M46,278 C45,236 43,194 41,153 C39,116 37,84 35,58 C33,38 31,24 29,9" stroke="#1d1108" stroke-width="10" fill="none" stroke-linecap="round"/>
-            <path d="M29,9 C34,-7 58,-20 90,-25 C70,-5 42,4 29,9"    fill="#192212"/>
-            <path d="M29,9 C40,0 67,-3 96,2 C73,9 46,13 29,9"        fill="#1b2412"/>
-            <path d="M29,9 C37,18 60,27 88,31 C65,22 40,16 29,9"     fill="#192212"/>
-            <path d="M29,9 C23,22 12,37 -5,50 C6,30 21,17 29,9"      fill="#172010"/>
-            <path d="M29,9 C20,15 1,22 -28,26 C-5,14 18,10 29,9"     fill="#192212"/>
-            <path d="M29,9 C24,-3 15,-22 7,-42 C12,-18 23,-3 29,9"   fill="#1b2412"/>
-            <circle cx="29" cy="9" r="5" fill="#1a1407"/>
-          </svg>
+
+      <!-- Social proof strip -->
+      <div class="hero-social-proof">
+        <div class="hero-thumb-stack">
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=80&q=80&auto=format&fit=crop&face" alt="">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&q=80&auto=format&fit=crop&face" alt="">
+          <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=80&q=80&auto=format&fit=crop&face" alt="">
+        </div>
+        <div class="hero-proof-text">
+          <strong>23 California families</strong> found their home this month through Kind
         </div>
       </div>
-    </div>
-    <!-- Inner right (smaller, mirrored) -->
-    <div class="h-palm pr3" data-depth="0.11">
-      <div class="palm-flip">
-        <div class="ps6">
-          <svg width="72" height="215" viewBox="0 0 72 215" style="overflow:visible">
-            <path d="M36,215 C35,183 34,150 32,118 C30,90 29,65 27,44 C26,28 25,18 24,6" stroke="#1a0f07" stroke-width="8" fill="none" stroke-linecap="round"/>
-            <path d="M24,6 C28,-5 46,-14 70,-18 C55,-4 32,3 24,6"  fill="#162010"/>
-            <path d="M24,6 C31,-1 52,-4 76,-1 C58,6 36,9 24,6"     fill="#182210"/>
-            <path d="M24,6 C29,13 46,19 68,22 C51,16 32,12 24,6"   fill="#162010"/>
-            <path d="M24,6 C18,16 10,28 -2,38 C5,24 17,13 24,6"    fill="#141e0e"/>
-            <path d="M24,6 C18,11 4,16 -18,18 C-2,10 16,7 24,6"    fill="#162010"/>
-            <path d="M24,6 C20,-2 13,-16 6,-30 C10,-13 19,-2 24,6" fill="#182210"/>
-            <circle cx="24" cy="6" r="4" fill="#161205"/>
-          </svg>
-        </div>
-      </div>
-    </div>
-
-    <!-- Atmospheric fog -->
-    <div class="hero-fog"></div>
-
-    <!-- Firefly particles -->
-    <canvas id="heroFireflies"></canvas>
-
-  </div><!-- /hero-scene -->
-
-  <div class="hero-glow"></div>
-  <div class="hero-inner">
-    <div class="badge">
-      <span class="badge-dot"></span>
-      Launching in California · 3D Property Universe · AI-First · KCF Initiative
-    </div>
-    <div style="font-size:14px;color:var(--gray);margin-bottom:16px;letter-spacing:0.02em;">
-      Kind Real Estate helps you find <span style="color:var(--gold);font-weight:600;">a place you can call home</span>
-    </div>
-    <h1>
-      Don't Search.<br>
-      <span class="line2"><span class="gold">Step</span> <span class="gradient">Inside</span>.</span>
-    </h1>
-    <p class="hero-sub">
-      <strong style="color:var(--gray-light);">Real estate without hassle</strong> — the first immersive platform where you don't browse listings, you <strong>experience spaces.</strong>
-      Buy, sell, rent, invest or stay. California-first. Powered by AI. Built on kindness.
-    </p>
-
-    <!-- Search Bar -->
-    <div class="search-bar fade-up">
-      <div class="search-mode">
-        <button class="mode-btn active" onclick="setMode(this,'Buy')">Buy</button>
-        <button class="mode-btn" onclick="setMode(this,'Rent')">Rent</button>
-        <button class="mode-btn" onclick="setMode(this,'Invest')">Invest</button>
-        <button class="mode-btn" onclick="setMode(this,'Stay')">Stay</button>
-      </div>
-      <input class="search-input" placeholder="Describe your dream space or enter a city..." id="searchInput">
-      <button class="search-submit" onclick="handleSearch()">✦ Experience</button>
-    </div>
-
-    <div class="hero-actions">
-      <a href="#features" class="btn-lg primary">Explore in 3D →</a>
-      <a href="#" class="btn-lg secondary" onclick="openDemoModal();return false;">▶ Watch Demo</a>
     </div>
   </div>
 </section>
@@ -2647,8 +2197,8 @@ body { overflow-x: hidden !important; }
   </div>
   <div class="hero-divider"></div>
   <div class="stat">
-    <div class="stat-num">35+</div>
-    <div class="stat-label">Platform screens · 7 integrated flows</div>
+    <div class="stat-num">1</div>
+    <div class="stat-label">Dedicated guide · From search to close</div>
   </div>
 </div>
 
@@ -2657,15 +2207,42 @@ body { overflow-x: hidden !important; }
   <div class="cards-track" id="cardsTrack"></div>
 </div>
 
+<!-- REAL HOMES PHOTO STRIP -->
+<section style="background:#0c0b09;padding:60px 0 20px;">
+  <div style="max-width:1200px;margin:0 auto;padding:0 40px;">
+    <div style="text-align:center;margin-bottom:40px;">
+      <div style="font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;">Real Homes · Real People · Real Support</div>
+      <p style="font-size:15px;color:var(--gray);max-width:480px;margin:0 auto;line-height:1.7;">Every journey is different. We've walked hundreds of Californians through each step — from the first search to the day they got their keys.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;">
+      <div style="position:relative;border-radius:10px;overflow:hidden;height:240px;">
+        <img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?w=600&q=80&auto=format&fit=crop" alt="Family in warm kitchen" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(12,11,9,0.7) 0%,transparent 55%);"></div>
+        <div style="position:absolute;bottom:16px;left:16px;font-size:12px;color:var(--cream);font-weight:500;">Bought in Pasadena · 18 days</div>
+      </div>
+      <div style="position:relative;border-radius:10px;overflow:hidden;height:240px;">
+        <img src="https://images.unsplash.com/photo-1560184897-ae75f418493e?w=600&q=80&auto=format&fit=crop" alt="Couple at new home" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(12,11,9,0.7) 0%,transparent 55%);"></div>
+        <div style="position:absolute;bottom:16px;left:16px;font-size:12px;color:var(--cream);font-weight:500;">Sold in Santa Monica · No pressure</div>
+      </div>
+      <div style="position:relative;border-radius:10px;overflow:hidden;height:240px;">
+        <img src="https://images.unsplash.com/photo-1600210492493-0946911123ea?w=600&q=80&auto=format&fit=crop" alt="Modern living room" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(12,11,9,0.7) 0%,transparent 55%);"></div>
+        <div style="position:absolute;bottom:16px;left:16px;font-size:12px;color:var(--cream);font-weight:500;">Rented in Silver Lake · Found in 5 days</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <div class="gradient-div"></div>
 
 <!-- HOW IT WORKS -->
 <section id="how">
   <div class="section-inner">
     <div class="fade-up">
-      <div class="section-label">The New Way</div>
-      <h2 class="section-title">Enter. Experience.<br>Feel. <span style="color:var(--gold)">Decide.</span></h2>
-      <p class="section-sub">We replaced the old "Search → Browse → Contact" loop with an immersive journey that feels like stepping into the future.</p>
+      <div class="section-label">Your Guided Journey</div>
+      <h2 class="section-title">From Confused<br>to <span style="color:var(--gold)">Confident.</span></h2>
+      <p class="section-sub">We removed the pressure, the confusion, and the hidden costs. Here's exactly how we guide you — from the first search to the day you get your keys.</p>
     </div>
     <div class="how-grid fade-up">
       <div class="step-card" data-step="01">
@@ -2675,24 +2252,79 @@ body { overflow-x: hidden !important; }
       </div>
       <div class="step-card" data-step="02">
         <div class="step-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
-        <div class="step-title">Enter the 3D Universe</div>
-        <div class="step-desc">Swipe to teleport — not scroll. Zoom from city → neighbourhood → living room in seconds.</div>
+        <div class="step-title">Explore at Your Own Pace</div>
+        <div class="step-desc">Walk through properties before visiting in person. Explore the neighbourhood, the street, and every room — from your sofa, on your schedule, with no agent pressure.</div>
       </div>
       <div class="step-card" data-step="03">
         <div class="step-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/><path d="M7 8h.01M11 8h6M7 12h.01M11 12h4"/></svg></div>
-        <div class="step-title">AI Guides the Tour</div>
-        <div class="step-desc">Your personal AI assistant highlights what matters, flags red flags, and compares properties in real-time.</div>
+        <div class="step-title">We Flag What Matters</div>
+        <div class="step-desc">Our AI highlights the things agents often skip — flood zones, HOA risks, true running costs, school ratings, noise levels. Honest information. No spin.</div>
       </div>
       <div class="step-card" data-step="04">
         <div class="step-icon"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg></div>
-        <div class="step-title">See the Full Picture</div>
-        <div class="step-desc">Neighbourhood simulation. Day vs night. Traffic noise. ROI projections. Investment heatmaps.</div>
+        <div class="step-title">Understand the Full Cost</div>
+        <div class="step-desc">Mortgage, tax, HOA, insurance, maintenance — we show the real monthly number before you fall in love. No surprises at close. No hidden costs discovered too late.</div>
       </div>
       <div class="step-card" data-step="05">
         <div class="step-icon"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
         <div class="step-title">Decide with Confidence</div>
         <div class="step-desc">Digital offers, transparent contracts, open legal marketplace. Fair fees. No pressure. Ever.</div>
       </div>
+    </div>
+  </div>
+</section>
+
+<div class="gradient-div"></div>
+
+<!-- COORDINATION SECTION -->
+<section>
+  <div class="section-inner">
+    <div class="fade-up" style="text-align:center;margin-bottom:48px;">
+      <div class="section-label" style="justify-content:center;">We Handle the Complexity</div>
+      <h2 class="section-title">One Journey. <span style="color:var(--gold)">Everything Coordinated.</span></h2>
+      <p class="section-sub" style="margin:0 auto;">Real estate involves a dozen different services all talking to each other. We bring them together so you don't have to manage the chaos.</p>
+    </div>
+    <div class="fade-up" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;max-width:960px;margin:0 auto;">
+
+      <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:18px;padding:28px 24px;display:flex;flex-direction:column;gap:12px;">
+        <div style="width:44px;height:44px;border-radius:12px;background:rgba(196,151,90,0.12);border:1px solid rgba(196,151,90,0.2);display:flex;align-items:center;justify-content:center;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <div style="font-size:16px;font-weight:700;color:var(--white);">Your Dedicated Guide</div>
+        <div style="font-size:13px;color:var(--gray);line-height:1.65;">One real person assigned to your journey from day one. They know your situation, answer your questions, and never push you toward a decision you're not ready for.</div>
+        <div style="font-size:11px;font-weight:700;color:var(--gold);letter-spacing:0.08em;margin-top:auto;">HUMAN SUPPORT</div>
+      </div>
+
+      <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:18px;padding:28px 24px;display:flex;flex-direction:column;gap:12px;">
+        <div style="width:44px;height:44px;border-radius:12px;background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.2);display:flex;align-items:center;justify-content:center;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        </div>
+        <div style="font-size:16px;font-weight:700;color:var(--white);">Documentation Made Simple</div>
+        <div style="font-size:13px;color:var(--gray);line-height:1.65;">Contracts, disclosures, title reports, inspection reports — we explain every document in plain English before you sign anything. No more signing pages you don't understand.</div>
+        <div style="font-size:11px;font-weight:700;color:#a78bfa;letter-spacing:0.08em;margin-top:auto;">CLARITY</div>
+      </div>
+
+      <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:18px;padding:28px 24px;display:flex;flex-direction:column;gap:12px;">
+        <div style="width:44px;height:44px;border-radius:12px;background:rgba(52,211,153,0.1);border:1px solid rgba(52,211,153,0.2);display:flex;align-items:center;justify-content:center;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/><path d="M7 8h.01M11 8h6M7 12h.01M11 12h4"/></svg>
+        </div>
+        <div style="font-size:16px;font-weight:700;color:var(--white);">Mortgage Without the Runaround</div>
+        <div style="font-size:13px;color:var(--gray);line-height:1.65;">Multiple lenders compete for your business. All referral fees fully disclosed. No hidden cuts. We pre-qualify you in minutes and integrate financing into your transaction seamlessly.</div>
+        <div style="font-size:11px;font-weight:700;color:#34d399;letter-spacing:0.08em;margin-top:auto;">TRANSPARENT FINANCE</div>
+      </div>
+
+      <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:18px;padding:28px 24px;display:flex;flex-direction:column;gap:12px;">
+        <div style="width:44px;height:44px;border-radius:12px;background:rgba(37,99,235,0.1);border:1px solid rgba(37,99,235,0.2);display:flex;align-items:center;justify-content:center;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="2"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        </div>
+        <div style="font-size:16px;font-weight:700;color:var(--white);">Legal & Moving Coordinated</div>
+        <div style="font-size:13px;color:var(--gray);line-height:1.65;">Choose your own conveyancer or solicitor — no tie-ins. We coordinate timelines between legal, escrow, and moving so nothing falls through the cracks on close day.</div>
+        <div style="font-size:11px;font-weight:700;color:#60a5fa;letter-spacing:0.08em;margin-top:auto;">NO TIE-INS</div>
+      </div>
+
+    </div>
+    <div class="fade-up" style="text-align:center;margin-top:40px;">
+      <a href="#" onclick="openStepInsideModal();return false;" style="display:inline-flex;align-items:center;gap:10px;padding:16px 36px;border-radius:14px;background:linear-gradient(135deg,rgba(196,151,90,0.15),rgba(196,151,90,0.08));border:1px solid rgba(196,151,90,0.3);color:var(--gold);font-size:15px;font-weight:600;text-decoration:none;letter-spacing:0.02em;">Meet Your Guide → <span style="font-size:12px;color:rgba(196,151,90,0.6);">Free · No commitment</span></a>
     </div>
   </div>
 </section>
@@ -2707,10 +2339,10 @@ body { overflow-x: hidden !important; }
       <h2 class="section-title">Built for Every<br><span style="color:var(--gold)">Kind</span> of Explorer</h2>
     </div>
     <div class="segments fade-up">
-      <div class="seg-card"><img class="seg-img" src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=200&q=80&auto=format&fit=crop" alt="Buyers"><div class="seg-name">Buyers</div><div class="seg-desc">Find your dream California home through experience, not static photos</div></div>
-      <div class="seg-card"><img class="seg-img" src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=200&q=80&auto=format&fit=crop" alt="Renters"><div class="seg-name">Renters</div><div class="seg-desc">Walk through before you commit. Compare neighbourhoods live.</div></div>
+      <div class="seg-card"><img class="seg-img" src="https://images.unsplash.com/photo-1628277613967-6abca504d0ac?w=200&q=80&auto=format&fit=crop" alt="Buyers"><div class="seg-name">Buyers</div><div class="seg-desc">Find your dream California home through experience, not static photos</div></div>
+      <div class="seg-card"><img class="seg-img" src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=200&q=80&auto=format&fit=crop" alt="Renters"><div class="seg-name">Renters</div><div class="seg-desc">Walk through before you commit. Compare neighbourhoods live.</div></div>
       <div class="seg-card"><img class="seg-img" src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=200&q=80&auto=format&fit=crop" alt="Investors"><div class="seg-name">Investors</div><div class="seg-desc">AI heatmaps, ROI analytics, and California market signals</div></div>
-      <div class="seg-card"><img class="seg-img" src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=200&q=80&auto=format&fit=crop" alt="Digital Nomads"><div class="seg-name">Digital Nomads</div><div class="seg-desc">Book CA stays, explore remotely, and feel at home anywhere</div></div>
+      <div class="seg-card"><img class="seg-img" src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=200&q=80&auto=format&fit=crop" alt="Digital Nomads"><div class="seg-name">Digital Nomads</div><div class="seg-desc">Book CA stays, explore remotely, and feel at home anywhere</div></div>
       <div class="seg-card"><img class="seg-img" src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&q=80&auto=format&fit=crop" alt="Agents"><div class="seg-name">Agents</div><div class="seg-desc">Host live 3D open houses. Reach qualified CA clients globally.</div></div>
     </div>
   </div>
@@ -2722,99 +2354,99 @@ body { overflow-x: hidden !important; }
 <section id="features">
   <div class="section-inner">
     <div class="fade-up">
-      <div class="section-label">Platform Features</div>
-      <h2 class="section-title">A Category of One.</h2>
-      <p class="section-sub">Eight breakthrough features that no other real estate platform offers — today or tomorrow. Click the first card to experience it live.</p>
+      <div class="section-label">Real Problems, Real Solutions</div>
+      <h2 class="section-title">Built Around<br><span style="color:var(--gold)">What Actually Matters.</span></h2>
+      <p class="section-sub">Every tool on this platform exists because a real person faced a real problem — and the industry failed them. Click the first card to see it live.</p>
     </div>
     <div class="features-grid fade-up">
 
       <div class="feat-card featured" onclick="handlePropClick({price:'$8,495,000',name:'Beverly Hills Estate',loc:'Beverly Hills, CA',type:'sale',img:'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1200&q=90&auto=format&fit=crop',beds:6,baths:7,sqft:'7,200'})" style="cursor:pointer;">
         <div class="feat-tag core">✦ Core Feature — Click to Experience Live →</div>
         <div class="feat-icon-wrap" style="background:rgba(37,99,235,0.15);border-color:rgba(37,99,235,0.3)"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
-        <div class="feat-title">3D Property Universe</div>
-        <div class="feat-desc">Users explore properties in a spatial 3D world instead of scrolling. Walk through neighbourhoods like a game. Zoom from city view to living room in one fluid motion. Powered by WebGL + AI-generated environments. This isn't a feature — it's a new medium for real estate discovery.</div>
+        <div class="feat-title">Walk Through Before You Visit</div>
+        <div class="feat-desc">Stop wasting weekends on viewings that disappoint. Explore the neighbourhood, the street, and every room of a property before booking a single visit. Our immersive viewer shows you reality — not just marketing photos — so you only visit homes you genuinely want.</div>
         <div style="display:flex;gap:8px;flex-wrap:wrap;">
-          <span class="feat-pill">Game-Inspired UX</span>
-          <span class="feat-pill">City → Room Zoom</span>
-          <span class="feat-pill">Instant Teleport</span>
+          <span class="feat-pill">Every Room Visible</span>
+          <span class="feat-pill">Neighbourhood Feel</span>
+          <span class="feat-pill">Save Wasted Trips</span>
         </div>
       </div>
 
       <div class="feat-card">
         <div class="feat-tag ai">AI</div>
         <div class="feat-icon-wrap"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
-        <div class="feat-title">Dream Space Generator</div>
-        <div class="feat-desc">Describe your ideal home in plain language. Our AI instantly visualises it as an interactive 3D environment. "Modern loft in Toronto with rooftop patio" — rendered in seconds. Tap into emotional attachment before you even view real listings.</div>
+        <div class="feat-title">Search in Plain English</div>
+        <div class="feat-desc">Stop fighting filter menus. Tell us what you actually want — "3-bed near good schools, quiet street, under $900K, room for a home office." Our AI understands your life, not just your budget, and surfaces 5–10 homes that genuinely fit — not 500 that technically match.</div>
         <div style="display:flex;gap:8px;flex-wrap:wrap;">
           <span class="feat-pill">Voice or Text</span>
-          <span class="feat-pill">Live Rendering</span>
+          <span class="feat-pill">No Scroll Overwhelm</span>
         </div>
       </div>
 
       <div class="feat-card">
         <div class="feat-tag ar">AR</div>
         <div class="feat-icon-wrap" style="background:rgba(6,182,212,0.1);border-color:rgba(6,182,212,0.2)"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><circle cx="12" cy="17" r="1"/><path d="M9 8h.01M12 8h3"/></svg></div>
-        <div class="feat-title">AR Walkthroughs</div>
-        <div class="feat-desc">Project any property into your physical space using your phone camera. Place a house layout in your living room. Walk around it. Feel the dimensions. Bridge imagination and reality before visiting in person.</div>
+        <div class="feat-title">Feel the Space Before You're There</div>
+        <div class="feat-desc">Use your phone camera to place any property into your own room at true scale. Will your sofa fit? Is the kitchen actually big enough? Understand dimensions before you make an offer — not after you've moved in.</div>
         <div style="display:flex;gap:8px;flex-wrap:wrap;">
-          <span class="feat-pill">Phone Camera</span>
           <span class="feat-pill">True Scale</span>
+          <span class="feat-pill">No Surprises</span>
         </div>
       </div>
 
       <div class="feat-card">
         <div class="feat-tag social">Social</div>
         <div class="feat-icon-wrap" style="background:rgba(139,92,246,0.1);border-color:rgba(139,92,246,0.2)"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-        <div class="feat-title">Live Virtual Open Houses</div>
-        <div class="feat-desc">Agents and buyers join a shared 3D space in real time. Ask questions. Point at features. Bring your architect. It's an open house you attend from your sofa — social, live, and deeply engaging.</div>
+        <div class="feat-title">Open Houses Without the Pressure</div>
+        <div class="feat-desc">Attend a live property walkthrough from your home — with your partner, your parents, or your architect on the call. Ask real questions to a real agent. No being herded through rooms. No pressure to decide on the spot.</div>
         <div style="display:flex;gap:8px;flex-wrap:wrap;">
-          <span class="feat-pill">Multi-User</span>
-          <span class="feat-pill">Live Chat</span>
+          <span class="feat-pill">Bring Who You Need</span>
+          <span class="feat-pill">No Rush</span>
         </div>
       </div>
 
       <div class="feat-card">
         <div class="feat-tag core">Simulation</div>
         <div class="feat-icon-wrap"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></div>
-        <div class="feat-title">Neighbourhood Simulator</div>
-        <div class="feat-desc">Toggle between day and night. Simulate rush-hour traffic. Hear the noise levels. See where schools, parks, and cafés are. Experience the neighbourhood's lifestyle before you commit — not just a map, a simulation.</div>
+        <div class="feat-title">Know the Neighbourhood Before You Commit</div>
+        <div class="feat-desc">What's it like at 8am on a school day? How loud is that road at rush hour? Where are the nearest good schools, parks, and cafés? We answer the questions agents don't — before you're locked into a lease or a mortgage.</div>
         <div style="display:flex;gap:8px;flex-wrap:wrap;">
-          <span class="feat-pill">Day / Night</span>
-          <span class="feat-pill">Traffic Model</span>
-          <span class="feat-pill">Noise Layers</span>
+          <span class="feat-pill">Rush Hour Reality</span>
+          <span class="feat-pill">Noise Levels</span>
+          <span class="feat-pill">Lifestyle Fit</span>
         </div>
       </div>
 
       <div class="feat-card">
         <div class="feat-tag data">Invest</div>
         <div class="feat-icon-wrap" style="background:rgba(16,185,129,0.1);border-color:rgba(16,185,129,0.2)"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-        <div class="feat-title">Investment Heatmaps</div>
-        <div class="feat-desc">Overlay live data on a 3D map. See ROI potential, rental demand curves, price trend momentum, and cap rate signals — all in real time. Stop guessing. Start knowing.</div>
+        <div class="feat-title">Invest With Your Eyes Open</div>
+        <div class="feat-desc">We show true cap rates — after vacancy, management fees, Prop 13 tax, fire insurance, and maintenance. Not the inflated numbers on other platforms. See exactly which streets carry the strongest rental demand and why, backed by public MLS data.</div>
         <div style="display:flex;gap:8px;flex-wrap:wrap;">
-          <span class="feat-pill">ROI Overlay</span>
-          <span class="feat-pill">3D Data Layers</span>
+          <span class="feat-pill">True Returns</span>
+          <span class="feat-pill">No Paper Napkin Math</span>
         </div>
       </div>
 
       <div class="feat-card">
         <div class="feat-tag ai">UX</div>
         <div class="feat-icon-wrap"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="13 17 18 12 13 7"/><polyline points="6 17 11 12 6 7"/></svg></div>
-        <div class="feat-title">Swipe → Teleport</div>
-        <div class="feat-desc">No more scrolling. One swipe drops you inside a property instantly. An addictive, TikTok-style discovery loop — but for real estate. Share 3D walkthroughs with friends in one tap.</div>
+        <div class="feat-title">No More Endless Scrolling</div>
+        <div class="feat-desc">One tap moves you inside the next property. No more sifting through hundreds of listings that mostly don't qualify. Share a walkthrough with your partner or family in seconds — get everyone on the same page before a single viewing is booked.</div>
         <div style="display:flex;gap:8px;flex-wrap:wrap;">
-          <span class="feat-pill">TikTok-style Feed</span>
-          <span class="feat-pill">Shareable Tours</span>
+          <span class="feat-pill">Curated Results</span>
+          <span class="feat-pill">Share Instantly</span>
         </div>
       </div>
 
       <div class="feat-card">
         <div class="feat-tag core">Trust</div>
         <div class="feat-icon-wrap"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-        <div class="feat-title">Truth Layer™</div>
-        <div class="feat-desc">Every listing comes with an honest pros & cons breakdown generated by AI. No spin. No pressure tactics. Fully disclosed referral fees. Verified agent ethics scoring. Kindness built into every interaction.</div>
+        <div class="feat-title">Truth Layer™ — Honest by Default</div>
+        <div class="feat-desc">Every listing shows you the real pros AND the real cons — flood zones, highway noise, HOA risks, insurance difficulties. Not just the sales pitch. Every agent is ethics-scored. Every referral fee is disclosed. Because honesty builds trust, and trust builds good decisions.</div>
         <div style="display:flex;gap:8px;flex-wrap:wrap;">
-          <span class="feat-pill">Verified Listings</span>
-          <span class="feat-pill">Ethics Score</span>
+          <span class="feat-pill">Pros & Cons Always Shown</span>
+          <span class="feat-pill">Agent Ethics Score</span>
         </div>
       </div>
 
@@ -3292,7 +2924,7 @@ body { overflow-x: hidden !important; }
           <tr>
             <td>Agent Ethics</td>
             <td><span class="x">✗ Commission-driven</span></td>
-            <td><span class="x">✗ BBC-exposed pressure tactics</span></td>
+            <td><span class="x">✗ Commission-driven, no ethics score</span></td>
             <td class="col-kind"><span class="tick">✓ Kindness Score™ — ethics first</span></td>
           </tr>
           <tr>
@@ -3306,8 +2938,8 @@ body { overflow-x: hidden !important; }
     </div>
     <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:32px;" class="fade-up">
       <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:16px;padding:24px;text-align:center;">
-        <div style="font-family:'Space Grotesk',sans-serif;font-size:40px;font-weight:800;color:var(--gold);">35+</div>
-        <div style="font-size:13px;color:var(--gray);margin-top:4px;">Screens · 7 flows · fully integrated</div>
+        <div style="font-family:'Space Grotesk',sans-serif;font-size:40px;font-weight:800;color:var(--gold);">1</div>
+        <div style="font-size:13px;color:var(--gray);margin-top:4px;">Dedicated guide · Your whole journey</div>
       </div>
       <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:16px;padding:24px;text-align:center;">
         <div style="font-family:'Space Grotesk',sans-serif;font-size:40px;font-weight:800;color:var(--gold);">5</div>
@@ -3333,7 +2965,7 @@ body { overflow-x: hidden !important; }
     <div class="fade-up" style="text-align:center;margin-bottom:48px;">
       <div class="section-label" style="justify-content:center;">Trust-First Platform</div>
       <h2 class="section-title">Eight pillars of a <span style="color:var(--gold)">trust-first</span> platform</h2>
-      <p class="section-sub" style="margin:0 auto;">Built from first principles — every feature designed to eliminate the exact failures that destroyed Purplebricks and eroded trust across the industry.</p>
+      <p class="section-sub" style="margin:0 auto;">Built from first principles around the exact pain points that break trust in real estate — opaque pricing, pressure tactics, information gaps, and poor coordination. We designed each pillar to solve one of those failures directly.</p>
     </div>
     <div class="pillars-grid fade-up">
 
@@ -3388,7 +3020,7 @@ body { overflow-x: hidden !important; }
           <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
         </div>
         <div class="pillar-title">Truth Layer™ Listings</div>
-        <div class="pillar-desc">Every listing shows honest Pros AND Cons with ideal buyer profile. Purplebricks and every traditional agent only shows positives. Truth builds long-term trust and referrals.</div>
+        <div class="pillar-desc">Every listing shows honest Pros AND Cons with an ideal buyer profile. The industry shows only positives — we show the full picture. Truth builds confident decisions, not regretful ones.</div>
       </div>
 
       <div class="pillar-card">
@@ -3401,12 +3033,12 @@ body { overflow-x: hidden !important; }
       </div>
 
       <div class="pillar-card">
-        <div class="pillar-tag unique">Unique</div>
-        <div class="pillar-icon" style="background:rgba(52,211,153,0.1);border-color:rgba(52,211,153,0.2);">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <div class="pillar-tag unique">Human</div>
+        <div class="pillar-icon" style="background:rgba(196,151,90,0.1);border-color:rgba(196,151,90,0.2);">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
         </div>
-        <div class="pillar-title">Kindness Layer™</div>
-        <div class="pillar-desc">At closing: "Would you like this home to create impact?" Optional contribution — buyer, seller, or agent. AI-generated impact story. The emotional differentiator no competitor can replicate.</div>
+        <div class="pillar-title">Real Human Support</div>
+        <div class="pillar-desc">A dedicated guide assigned to every transaction — not a chatbot. One person who knows your situation, answers at every step, coordinates the moving parts, and never pressures you toward a decision you're not ready for.</div>
       </div>
 
     </div>
@@ -4042,17 +3674,17 @@ body { overflow-x: hidden !important; }
     <!-- Bottom: waitlist + features -->
     <div class="app-cs-bottom fade-up">
       <div class="app-cs-features">
-        <div class="app-cs-feat"><span class="app-cs-feat-icon">🏠</span><span>3D Walkthroughs</span></div>
-        <div class="app-cs-feat"><span class="app-cs-feat-icon">🤖</span><span>AI Smart Search</span></div>
-        <div class="app-cs-feat"><span class="app-cs-feat-icon">📡</span><span>Live Alerts</span></div>
-        <div class="app-cs-feat"><span class="app-cs-feat-icon">🥽</span><span>AR Mode</span></div>
-        <div class="app-cs-feat"><span class="app-cs-feat-icon">📊</span><span>Market Insights</span></div>
+        <div class="app-cs-feat"><span class="app-cs-feat-icon">🏠</span><span>Walk through before visiting</span></div>
+        <div class="app-cs-feat"><span class="app-cs-feat-icon">💬</span><span>Message your guide anytime</span></div>
+        <div class="app-cs-feat"><span class="app-cs-feat-icon">📋</span><span>All documents in one place</span></div>
+        <div class="app-cs-feat"><span class="app-cs-feat-icon">🔔</span><span>Instant alerts, no noise</span></div>
+        <div class="app-cs-feat"><span class="app-cs-feat-icon">💰</span><span>True cost shown upfront</span></div>
       </div>
       <form class="app-cs-form" onsubmit="(function(e){e.preventDefault();var i=document.getElementById('appWEmail');if(i&&i.value){i.closest('form').innerHTML='<p style=\'color:var(--gold);font-weight:600;letter-spacing:.06em;\'>✦ You\'re on the list. We\'ll notify you first.</p>'};})(event)">
         <input type="email" id="appWEmail" placeholder="Enter your email for early access" required>
         <button type="submit">Notify Me →</button>
       </form>
-      <p class="app-cs-note">iOS &amp; Android · No spam · Founding member badge included</p>
+      <p class="app-cs-note">iOS &amp; Android · No spam · Priority access + locked-in transparent pricing</p>
     </div>
 
   </div>
@@ -4067,13 +3699,14 @@ body { overflow-x: hidden !important; }
       <img class="kindness-icon" src="https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=200&q=80&auto=format&fit=crop" alt="Community Impact" style="width:120px;height:120px;border-radius:50%;object-fit:cover;border:3px solid rgba(232,197,106,0.4);box-shadow:0 0 40px rgba(232,197,106,0.2);">
       <div class="section-label" style="justify-content:center;">The Kindness Layer™</div>
       <h2 class="section-title">Real Estate That<br>Gives <span style="color:var(--gold)">Back</span></h2>
-      <p style="font-size:17px;color:var(--gray);line-height:1.75;margin-bottom:32px;">Every transaction on Kind Real Estate includes an optional contribution to the Kindness Community Foundation. Building sustainable systems that create meaningful community impact worldwide — one property at a time.</p>
+      <p style="font-size:17px;color:var(--gray);line-height:1.75;margin-bottom:16px;">Kind Real Estate is an initiative of Kindness Community Foundation (KCF LLC) — a Newport Beach-based organisation built around one idea: that how you treat people during the biggest financial decision of their life actually matters.</p>
+      <p style="font-size:17px;color:var(--gray);line-height:1.75;margin-bottom:32px;">A share of every completed transaction is reinvested into housing access programmes — helping first-time buyers, renters in transition, and underserved communities navigate real estate with real support. Not a marketing line. Just how we're built.</p>
       <p style="font-size:14px;color:var(--gray);margin-bottom:8px;">🌐 <a href="https://kindnesscommunityfoundation.com/" target="_blank" style="color:var(--gold);text-decoration:none;">kindnesscommunityfoundation.com</a></p>
       <p style="font-size:14px;color:var(--gray);">📍 Newport Beach, California 92660, USA</p>
       <div class="kindness-stats">
         <div class="k-stat"><div class="k-stat-num">100%</div><div class="k-stat-label">Transparent Fees</div></div>
         <div class="k-stat"><div class="k-stat-num">0</div><div class="k-stat-label">Pressure Tactics</div></div>
-        <div class="k-stat"><div class="k-stat-num">∞</div><div class="k-stat-label">Community Impact</div></div>
+        <div class="k-stat"><div class="k-stat-num">2.5%</div><div class="k-stat-label">Flat Commission</div></div>
       </div>
     </div>
   </div>
@@ -4223,7 +3856,7 @@ body { overflow-x: hidden !important; }
           <div class="nav-logo-icon">K</div>
           <span class="nav-logo-text">Kind <span>Real Estate</span></span>
         </a>
-        <p>The first immersive real estate platform. Built on kindness, powered by AI, experienced in 3D. An initiative by Kindness Community Foundation (KCF LLC).</p>
+        <p>Transparent pricing, verified agents, real human support. An initiative by Kindness Community Foundation (KCF LLC) — built to make real estate feel human again.</p>
         <div class="footer-social">
           <a href="#" class="social-btn">𝕏</a>
           <a href="#" class="social-btn">in</a>
@@ -4245,15 +3878,15 @@ body { overflow-x: hidden !important; }
         </ul>
       </div>
       <div class="footer-col">
-        <h4>For Agents</h4>
+        <h4>Trust & Transparency</h4>
         <ul>
-          <li><a href="#">List a Property</a></li>
-          <li><a href="#">Virtual Open Houses</a></li>
-          <li><a href="#">Agent Hub</a></li>
+          <li><a href="#">How Our Fees Work</a></li>
+          <li><a href="#">Agent Verification</a></li>
+          <li><a href="#">Pricing Breakdown</a></li>
+          <li><a href="#">Complaint Resolution</a></li>
+          <li><a href="#">No Hidden Costs</a></li>
           <li><a href="#">Kindness Score™</a></li>
-          <li><a href="#">3D Staging</a></li>
-          <li><a href="#">Market Insights</a></li>
-          <li><a href="#">Open Legal Marketplace</a></li>
+          <li><a href="#">Fair Housing Policy</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -4287,37 +3920,6 @@ body { overflow-x: hidden !important; }
 </div>
 
 <script>
-// ── STARFIELD ──
-const canvas = document.getElementById('starfield');
-const ctx = canvas.getContext('2d');
-let stars = [], W, H;
-
-function resize() {
-  W = canvas.width = window.innerWidth;
-  H = canvas.height = window.innerHeight;
-}
-function initStars() {
-  stars = Array.from({length: 180}, () => ({
-    x: Math.random() * W, y: Math.random() * H,
-    r: Math.random() * 1.5 + 0.2,
-    o: Math.random() * 0.6 + 0.2,
-    sp: Math.random() * 0.3 + 0.05
-  }));
-}
-function drawStars() {
-  ctx.clearRect(0, 0, W, H);
-  stars.forEach(s => {
-    ctx.beginPath();
-    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(255,255,255,${s.o})`;
-    ctx.fill();
-    s.y += s.sp;
-    if (s.y > H) { s.y = 0; s.x = Math.random() * W; }
-  });
-  requestAnimationFrame(drawStars);
-}
-resize(); initStars(); drawStars();
-window.addEventListener('resize', () => { resize(); initStars(); });
 
 // ── PROPERTY CARDS ──
 const listings = [
@@ -4822,86 +4424,6 @@ document.querySelectorAll('[id^="ptab-"]').forEach(btn => {
   btn.addEventListener('click', () => trackEvent('pricing_tab', 'engagement', btn.id));
 });
 
-// ── HERO SCENE PARALLAX (mouse depth) ──
-(function(){
-  var scene = document.getElementById('heroScene');
-  if (!scene) return;
-  var layers = Array.from(scene.querySelectorAll('[data-depth]'));
-  var mx = 0, my = 0, raf = 0;
-  document.addEventListener('mousemove', function(e){
-    mx = (e.clientX / window.innerWidth  - 0.5) * 2;
-    my = (e.clientY / window.innerHeight - 0.5) * 2;
-    if (!raf) raf = requestAnimationFrame(applyP);
-  });
-  function applyP(){
-    raf = 0;
-    layers.forEach(function(l){
-      var d  = parseFloat(l.dataset.depth) || 0;
-      var tx = (mx * d * 38).toFixed(2);
-      var ty = (my * d * 19).toFixed(2);
-      l.style.transform = 'translate(' + tx + 'px,' + ty + 'px)';
-    });
-  }
-})();
-
-// ── HERO FIREFLIES ──
-(function(){
-  var fc = document.getElementById('heroFireflies');
-  if (!fc) return;
-  var fx = fc.getContext('2d');
-  function fResize(){
-    var p = fc.parentElement;
-    fc.width  = p ? p.offsetWidth  : window.innerWidth;
-    fc.height = p ? p.offsetHeight : window.innerHeight;
-  }
-  fResize();
-  window.addEventListener('resize', fResize);
-  var flies = Array.from({length: 54}, function(){
-    return {
-      x:    Math.random(),
-      y:    Math.random() * 0.72,
-      r:    0.6 + Math.random() * 1.6,
-      spd:  0.12 + Math.random() * 0.48,
-      ang:  Math.random() * Math.PI * 2,
-      dAng: (Math.random() - 0.5) * 0.024,
-      op:   Math.random(),
-      dOp:  Math.random() > 0.5 ? 1 : -1,
-      opS:  0.004 + Math.random() * 0.016,
-      hue:  33 + Math.random() * 24
-    };
-  });
-  function fDraw(){
-    var W = fc.width, H = fc.height;
-    fx.clearRect(0, 0, W, H);
-    flies.forEach(function(f){
-      f.ang += f.dAng;
-      f.x   += Math.cos(f.ang) * f.spd / W;
-      f.y   += (Math.sin(f.ang) * f.spd * 0.32 - 0.09) / H;
-      if (f.x < 0) f.x = 1;
-      if (f.x > 1) f.x = 0;
-      if (f.y < 0) f.y = 0.70;
-      if (f.y > 0.73) f.y = 0.01;
-      f.op += f.dOp * f.opS;
-      if (f.op >= 1){ f.op = 1; f.dOp = -1; }
-      if (f.op <= 0){ f.op = 0; f.dOp =  1; }
-      var px = f.x * W, py = f.y * H;
-      var g  = fx.createRadialGradient(px, py, 0, px, py, f.r * 5.5);
-      g.addColorStop(0,    'hsla(' + f.hue + ',85%,72%,' + (f.op * 0.95) + ')');
-      g.addColorStop(0.35, 'hsla(' + f.hue + ',72%,62%,' + (f.op * 0.38) + ')');
-      g.addColorStop(1,    'hsla(' + f.hue + ',60%,50%,0)');
-      fx.beginPath();
-      fx.arc(px, py, f.r * 5.5, 0, Math.PI * 2);
-      fx.fillStyle = g;
-      fx.fill();
-      fx.beginPath();
-      fx.arc(px, py, f.r * 0.65, 0, Math.PI * 2);
-      fx.fillStyle = 'hsla(' + (f.hue + 20) + ',95%,90%,' + f.op + ')';
-      fx.fill();
-    });
-    requestAnimationFrame(fDraw);
-  }
-  fDraw();
-})();
 </script>
 
 <!-- ═══ STEP INSIDE MODAL ═══ -->
