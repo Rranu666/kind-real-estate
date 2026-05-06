@@ -2186,6 +2186,19 @@ body { overflow-x: hidden !important; }
 </style>
 </head>
 <body>
+<script>
+  (function() {
+    function notify() {
+      window.parent.postMessage({ type: "app_changed_url", url: window.location.href }, "*");
+    }
+    notify();
+    var _push = history.pushState.bind(history);
+    history.pushState = function() { _push.apply(history, arguments); notify(); };
+    var _replace = history.replaceState.bind(history);
+    history.replaceState = function() { _replace.apply(history, arguments); notify(); };
+    window.addEventListener("popstate", notify);
+  })();
+</script>
 
 <!-- NAV -->
 <nav id="navbar">
@@ -5238,8 +5251,5 @@ setTimeout(() => {
   gtag('js', new Date());
   gtag('config', 'G-XXXXXXXXXX', { send_page_view: true, cookie_flags: 'SameSite=None;Secure' });
 </script> -->
-  <script>
-    window.parent.postMessage({ type: "app_changed_url", url: window.location.href }, "*");
-  </script>
 </body>
 </html>
