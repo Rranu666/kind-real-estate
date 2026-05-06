@@ -784,5 +784,8 @@ document.querySelector('.newsletter-form')?.addEventListener('submit', () => {
   gtag('js', new Date());
   gtag('config', 'G-XXXXXXXXXX');
 </script> -->
+  <script>
+    window.parent.postMessage({ type: "app_changed_url", url: window.location.href }, "*");
+  </script>
 </body>
 </html>

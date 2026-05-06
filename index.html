@@ -5238,5 +5238,8 @@ setTimeout(() => {
   gtag('js', new Date());
   gtag('config', 'G-XXXXXXXXXX', { send_page_view: true, cookie_flags: 'SameSite=None;Secure' });
 </script> -->
+  <script>
+    window.parent.postMessage({ type: "app_changed_url", url: window.location.href }, "*");
+  </script>
 </body>
 </html>

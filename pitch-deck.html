@@ -480,5 +480,8 @@ let tx=0;
 document.addEventListener('touchstart',e=>tx=e.touches[0].clientX,{passive:true});
 document.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>50)go(dx<0?1:-1);},{passive:true});
 </script>
+  <script>
+    window.parent.postMessage({ type: "app_changed_url", url: window.location.href }, "*");
+  </script>
 </body>
 </html>
